@@ -11,9 +11,9 @@ function login(){
     var password = $("#passwordInput").val();
 
     if (name === "")
-        alert("No name entered. Please enter name and try again")
+        bootstrap_alert.warning("No name entered. Please enter name and try again");
     else if (password === "")
-        alert("No password entered. Please enter password and try again")
+        bootstrap_alert.warning("No password entered. Please enter password and try again");
     else{
         var input = {};
         input.name = name;
@@ -34,9 +34,22 @@ function login(){
             }
         }
         else{
-            alert("Invalid username or password was given.");
+            bootstrap_alert.warning("Invalid username or password was given.");
         }
     }
 
 }
+//Hiding the box that will be used to display warning
+$("#alert-box").hide();
+
+//Function to get rid of alert after displaying it.
+bootstrap_alert = function() {}
+bootstrap_alert.warning = function(message) {
+    document.getElementById("alert-box").innerHTML = message;
+    $("#alert-box").fadeTo(2000, 500).slideUp(500, function() {
+        $("#alert-box").slideUp(500);
+    });
+};
+
+
 
