@@ -33,9 +33,9 @@ public class LoginManager {
         Iterable<User> allUsers = databaseController.getAllUsers();
 
         for (User user: allUsers){
-            if (loginRequest.getName().equals(user.getName()) && loginRequest.getName().equals(user.getName()))
-                logger.info("User found with name " + user.getName() );
+                logger.info("User found with name " + user.getName());
                 return new LoginResponse(true, user);
+            }
         }
 
         logger.info("Could not find user with name " + loginRequest.getName() );

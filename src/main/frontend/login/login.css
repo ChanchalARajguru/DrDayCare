@@ -1,0 +1,8 @@
+#loginPanel {
+    margin: 10% 30%;
+}
+body{
+    background-image: url("background.jpg");
+    background-color: #cccccc;
+    background-size: 100% 100%;
+}
