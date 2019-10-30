@@ -19,18 +19,26 @@ public class LoginManager {
 
     Logger logger = LoggerFactory.getLogger(LoginManager.class);
 
-    private final DatabaseController databaseController;
     @Autowired
+    private final DatabaseController databaseController;
+
     public LoginManager( final DatabaseController databaseController){this.databaseController =databaseController;}
-    public LoginResponse checkLogin(LoginRequest loginRequest) throws SQLException {
+
+    //Method uses an instance of databaseController to get a list of all users. Then the input user is compared against
+    // each user in the database, one at a time and if the user is found it is returned.
+    public LoginResponse checkLogin(LoginRequest loginRequest) throws SQLException { ;
+
+        logger.info("Trying to find user with name " + loginRequest.getName() );
 
         Iterable<User> allUsers = databaseController.getAllUsers();
 
         for (User user: allUsers){
             if (loginRequest.getName().equals(user.getName()) && loginRequest.getName().equals(user.getName()))
+                logger.info("User found with name " + user.getName() );
                 return new LoginResponse(true, user);
         }
 
+        logger.info("Could not find user with name " + loginRequest.getName() );
         return new LoginResponse(false, null);
     }
 }
