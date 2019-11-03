@@ -1,0 +1,35 @@
+
+body {
+    background: #fdecff !important;
+
+}
+
+.navbar{
+    color: #fdecff !important;
+    background-color: #6d0c74 !important;
+}
+.nav-item{
+    text-emphasis-color: #fdecff !important;
+
+}
+.nav-link{
+    color: #fdecff !important;
+}
+.card{
+    background-color: #fdecff !important;
+    border-color: #6d0c74 !important;
+}
+.card-header{
+    border-color: #6d0c74 !important;
+    background-color: #fdecff !important;
+}
+.card-deck{
+    margin-top: 5%;
+}
+.jumbotron{
+    background-color: #fdecff !important;
+}
+.jumbotron-fluid{
+    text-align: center!important;
+}
+.b
