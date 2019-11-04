@@ -14,6 +14,7 @@ import java.sql.SQLException;
 public class HttpController
 {
     Logger logger = LoggerFactory.getLogger(HttpController.class);
+    private final String crossOrigin = "http://localhost:9000";
 
     @Autowired
     private LoginManager loginManager;
@@ -21,9 +22,9 @@ public class HttpController
     //Takes a POST request over at address $System_IP/login (ie http://localhost:8080/login if run on local system) with a JSON login request in the body
     //Method takes in a loginRequest, gives information to LoginManager and then returns the loginResponse it receives from the manager.
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    @CrossOrigin(origins = "http://localhost:9000")
+    @CrossOrigin(origins = crossOrigin)
     public LoginResponse checkLogin(@RequestBody LoginRequest loginRequest) throws SQLException {
-        logger.info("HTTP client received Login Request");
+        logger.info("HTTP client received Login Request" + loginRequest.getName() + " " + loginRequest.getPassword());
         return loginManager.checkLogin(loginRequest);
     }
 }
