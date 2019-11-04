@@ -21,6 +21,7 @@ public class HttpController
 
     @Autowired
     private LoginManager loginManager;
+    
 
     @Autowired
     private PrescriptionManager prescriptionManager;
