@@ -14,12 +14,10 @@ import java.sql.SQLException;
 public class HttpController
 {
     Logger logger = LoggerFactory.getLogger(HttpController.class);
-    private final String crossOrigin = "http://localhost:9000";
+    private final String crossOrigin = "http://localhost:63342";
 
     @Autowired
     private LoginManager loginManager;
-
-    
 
     //Takes a POST request over at address $System_IP/login (ie http://localhost:8080/login if run on local system) with a JSON login request in the body
     //Method takes in a loginRequest, gives information to LoginManager and then returns the loginResponse it receives from the manager.
