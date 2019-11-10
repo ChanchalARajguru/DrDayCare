@@ -1,6 +1,5 @@
 package eu.teama.drdaycare.DatabaseHandler;
 
-import eu.teama.drdaycare.UserTypes.Prescription;
 import eu.teama.drdaycare.UserTypes.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,9 +15,6 @@ public class DatabaseController {
 
     @Autowired
     private UserRepository userRepository;
-
-    @Autowired
-    private PrescriptionRepository PrescriptionRepository;
 
     //Inserting user into repository, making use of the the repository interfaces built in save functionality.
     public void insertUser(User user){
@@ -76,14 +72,5 @@ public class DatabaseController {
         }
         return count;
     }
-
-    //Retrieving all prescriptions from database, making use of built method of repository
-
-    public Iterable<Prescription> getAllPrescriptions(){
-        logger.info("Searching for All Prescriptions ");
-        Iterable<Prescription> prescriptions = PrescriptionRepository.findAll();
-        return prescriptions;
-
-      }
     
 }
