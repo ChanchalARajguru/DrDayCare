@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="en">
+<head>
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<style>
+.jumbotron {
+	padding-top: 50%;
+	padding-bottom: 20%;
+	background-color: #00F3FF;
+	padding: 5em inherit;
+}
+</style>
+<!-- Bootstrap CSS -->
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+	integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+	integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+	crossorigin="anonymous"></script>
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+	integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+	crossorigin="anonymous"></script>
+
+<script>
+function addUser(){
+    
+        var response = addUser1();
+
+        alert(JSON.stringify(response));
+
+        if (response.valid === true){
+            var user = response.user;
+            switch (user.userRole) {
+                case 1: window.location.replace("dummy_pages/dummy1.html"); break;
+                case 2: window.location.replace("dummy_pages/dummy2.html"); break;
+                case 3: window.location.replace("dummy_pages/dummy3.html"); break;
+                case 4: window.location.replace("dummy_pages/dummy4.html"); break;
+                case 5: window.location.replace("dummy_pages/dummy5.html"); break;
+            }
+        }
+        else{
+            bootstrap_alert.warning("Invalid username or password was given.");
+        }
+   
+}
+function addUser1() {
+    $.ajax({
+        type: "POST",
+        url: baseUrl + "/addUser",
+        data: JSON.stringify(""),
+        dataType: "json",
+        contentType: "application/json; charset=utf-8",
+        async: false,
+        cache: false,
+        success: function (response) {
+            final_response = response;
+        },
+        error: function () {
+            alert("Error on server side!")
+        }
+    });
+    return final_response;
+}
+//Hiding the box that will be used to display warning
+$("#alert-box").hide();
+
+//Function to get rid of alert after displaying it.
+bootstrap_alert = function() {}
+bootstrap_alert.warning = function(message) {
+    document.getElementById("alert-box").innerHTML = message;
+    $("#alert-box").fadeTo(2000, 500).slideUp(500, function() {
+        $("#alert-box").slideUp(500);
+    });
+};
+
+$(document).ready(function() {
+    $("#solTitle a").click(function() {
+        
+    });
+});
+</script>
+<title>Administrator!</title>
+</head>
+<body>
+	<div class="container-fluid">
+		<div class="text-center">
+
+			<h4>
+				HSE <span class="badge badge-secondary">Admin</span>
+			</h4>
+
+		</div>
+		<div class="container">
+			<!-- Search form -->
+			<input class="form-control" type="text" placeholder="Search"
+				aria-label="Search">
+		</div>
+		<nav aria-label="Page navigation example">
+			<ul class="pagination justify-content-center">
+				<li class="page-item"><a class="page-link" href="#"
+					aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+						<span class="sr-only">Previous</span>
+				</a></li>
+				<li class="page-item"><a class="page-link" href="#">1</a></li>
+				<li class="page-item"><a class="page-link" href="#">2</a></li>
+				<li class="page-item"><a class="page-link" href="#">3</a></li>
+				<li class="page-item"><a class="page-link" href="#"
+					aria-label="Next"> <span aria-hidden="true">&raquo;</span> <span
+						class="sr-only">Next</span>
+				</a></li>
+			</ul>
+		</nav>
+		<ul class="list-group px-md-5">
+			<li class="list-group-item">
+				<div class="card">
+
+					<div class="row">
+
+						<div class="col-sm-3">
+							<img class="img-thumbnail" src="https://i.pravatar.cc/300"
+								height="142" width="142" alt="profile 1">
+						</div>
+						<div class="col-sm-8 card-body">
+							<h5 class="card-title">Patient 1</h5>
+
+							<p class="card-text">Lorem Ipsum is simply dummy text of the
+								printing and typesetting industry. Lorem Ipsum has been the
+								industry's standard dummy text ever since the 1500s, when an
+								unknown printer took a galley of type and scrambled it to make a
+								type specimen book.</p>
+
+						</div>
+						<div id = "solTitle" class="col-sm-1">
+							<a href="#" class="btn btn-primary" >Edit</a>
+						</div>
+					</div>
+				</div>
+			</li>
+			<li class="list-group-item">
+			<div class="card">
+					<!-- <img class="card-img-top" src="" alt="profile 2"> -->
+					<div class="row">
+
+						<div class="col-sm-3">
+							<img class="img-thumbnail" src="https://i.pravatar.cc/300"
+								height="142" width="142" alt="profile 1">
+						</div>
+						<div class="col-sm-8 card-body">
+							<h5 class="card-title">Patient 2</h5>
+
+							<p class="card-text">Lorem Ipsum is simply dummy text of the
+								printing and typesetting industry. Lorem Ipsum has been the
+								industry's standard dummy text ever since the 1500s, when an
+								unknown printer took a galley of type and scrambled it to make a
+								type specimen book.</p>
+
+						</div>
+						<div class="col-sm-1">
+							<a href="#" class="btn btn-primary">Edit</a>
+						</div>
+					</div>
+
+				</div></li>
+			<li class="list-group-item">
+			<div class="card">
+					<div class="row">
+
+						<div class="col-sm-3">
+							<img class="img-thumbnail" src="https://i.pravatar.cc/300"
+								height="142" width="142" alt="profile 1">
+						</div>
+						<div class="col-sm-8 card-body">
+							<h5 class="card-title">Patient 3</h5>
+
+							<p class="card-text">Lorem Ipsum is simply dummy text of the
+								printing and typesetting industry. Lorem Ipsum has been the
+								industry's standard dummy text ever since the 1500s, when an
+								unknown printer took a galley of type and scrambled it to make a
+								type specimen book.</p>
+						</div>
+						<div class="col-sm-1">
+							<a href="#" class="btn btn-primary">Edit</a>
+						</div>
+					</div>
+				</div></li>
+			<li class="list-group-item">
+			<div class="card">
+					<div class="row">
+
+						<div class="col-sm-3">
+							<img class="img-thumbnail" src="https://i.pravatar.cc/300"
+								height="142" width="142" alt="profile 1">
+						</div>
+						<div class="col-sm-8 card-body">
+							<h5 class="card-title">Patient 4</h5>
+
+							<p class="card-text">Lorem Ipsum is simply dummy text of the
+								printing and typesetting industry. Lorem Ipsum has been the
+								industry's standard dummy text ever since the 1500s, when an
+								unknown printer took a galley of type and scrambled it to make a
+								type specimen book.</p>
+
+						</div>
+						<div class="col-sm-1">
+							<a href="#" class="btn btn-primary">Edit</a>
+						</div>
+					</div>
+				</div></li>
+			<li class="list-group-item">
+			<div class="card">
+					<div class="row">
+
+						<div class="col-sm-3">
+							<img class="img-thumbnail" src="https://i.pravatar.cc/300"
+								height="142" width="142" alt="profile 1">
+						</div>
+						<div class="col-sm-8 card-body">
+							<h5 class="card-title">Patient 5</h5>
+
+							<p class="card-text">Lorem Ipsum is simply dummy text of the
+								printing and typesetting industry. Lorem Ipsum has been the
+								industry's standard dummy text ever since the 1500s, when an
+								unknown printer took a galley of type and scrambled it to make a
+								type specimen book.</p>
+
+						</div>
+						<div class="col-sm-1">
+							<a href="#" class="btn btn-primary">Edit</a>
+						</div>
+					</div>
+
+				</div></li>
+		</ul>
+	</div>
+</body>
+</html>
