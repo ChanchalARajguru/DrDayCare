@@ -9,10 +9,11 @@ public class PrescriptionRequest {
 
         this.patient_id = patient_id;
     }
-public PrescriptionRequest(){}
+
+    public PrescriptionRequest(){}
+
     public Integer getPatient_id() {
       return patient_id;
-      //return 23;
-    }
+         }
 
 }

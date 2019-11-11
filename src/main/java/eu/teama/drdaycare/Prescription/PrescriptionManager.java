@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 ///Method uses an instance of databaseController to get a list of all prescriptions. Then the patient_id is compared against
 // each patient_id in the database, one at a time and if prescription is found it is returned.
+
 @Service
 public class PrescriptionManager {
     Logger logger = LoggerFactory.getLogger(PrescriptionManager.class);
