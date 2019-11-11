@@ -35,10 +35,10 @@ public class HttpController {
         return loginManager.checkLogin(loginRequest);
     }
     //Takes a POST request over at address $System_IP/login (ie http://localhost:8080/prescription if run on local system) with a JSON prescription request in the body
-    //Method takes in a PrescrptionRequest, gives information to PrescriptionManager and then returns the loginResponse it receives from the manager.
+    //Method takes in a Prescription Request, gives information to PrescriptionManager and then returns the loginResponse it receives from the manager.
     @RequestMapping(value = "/prescription", method = RequestMethod.POST)
     @CrossOrigin(origins = crossOrigin)
-    public PrescriptionResponse getPrescription(PrescriptionRequest prescriptionRequest) throws SQLException {
+    public PrescriptionResponse getPrescription(@RequestBody PrescriptionRequest prescriptionRequest) throws SQLException {
         logger.info("HTTP client received Prescription Request" + prescriptionRequest.getPatient_id());
         return prescriptionManager.getPrescription(prescriptionRequest);
     }
