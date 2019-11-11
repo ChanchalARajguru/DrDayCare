@@ -1,0 +1,28 @@
+.bggreen{
+    background-color: #5cb85c;
+}
+.bgblue{
+    background-color: #5bc0de;
+}
+.bgyellow{
+    background-color: gold;
+}
+.bgorange{
+    background-color: darkorange;
+}
+.mar-left{
+    margin-left: 3%;
+}
+.p-format{
+    color:white;
+    font-family: 'DejaVu Serif', Georgia, "Times New Roman", Times, serif;
+}
+.num{
+    font-size:1cm;
+}
+.mr-top{
+    margin-top: 2%;
+}
+.over{
+    clear: both;
+}
