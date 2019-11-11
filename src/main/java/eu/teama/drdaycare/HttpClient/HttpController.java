@@ -23,7 +23,7 @@ public class HttpController
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     @CrossOrigin(origins = "http://localhost:9000")
     public LoginResponse checkLogin(@RequestBody LoginRequest loginRequest) throws SQLException {
-        logger.info("HTTP client received Login Request"); 
+        logger.info("HTTP client received Login Request");
         return loginManager.checkLogin(loginRequest);
     }
 }
