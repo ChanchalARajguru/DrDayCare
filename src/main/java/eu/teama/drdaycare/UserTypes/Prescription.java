@@ -2,6 +2,10 @@ package eu.teama.drdaycare.UserTypes;
 
 import javax.persistence.*;
 import java.util.Date;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @Entity
 public class Prescription {
@@ -52,9 +56,7 @@ public class Prescription {
     public void setEnd_date(Date end_date) {
         this.end_date = end_date;
     }
-   // public String getPrescription_details() {
-     //   return prescription_details;
-    //}
+   public String getPrescription_details() { return prescription_details; }
     public void setPrescription_details(String prescription_details) {
       this.prescription_details = prescription_details;
     }

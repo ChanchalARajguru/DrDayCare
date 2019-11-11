@@ -4,16 +4,17 @@ import eu.teama.drdaycare.UserTypes.Prescription;
 
 public class PrescriptionResponse {
 
-    private final Prescription prescription_details;
+    private final Prescription prescription;
     private final boolean valid;
-    public PrescriptionResponse(boolean valid , Prescription prescription_details) {
-        this.prescription_details = prescription_details;
+    public PrescriptionResponse(boolean valid , Prescription prescription) {
         this.valid = valid;
+        this.prescription = prescription;
+
     }
     public boolean isValid() {
         return valid;
     }
-    public Prescription getPrescription_details() {
-        return prescription_details;
+    public Prescription getPrescription() {
+        return prescription;
     }
 }

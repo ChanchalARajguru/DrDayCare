@@ -74,6 +74,8 @@ public class DatabaseController {
         }
         return count;
     }
+
+    //Returning an iterable of prescriptions based on patient_id given. Makes use of custom made query method in userRepository.
     public Iterable<Prescription> getAllPrescriptions(){
         logger.info("Attempting to return all Prescription");
         Iterable<Prescription> prescriptions = prescriptionRepository.findAll();
