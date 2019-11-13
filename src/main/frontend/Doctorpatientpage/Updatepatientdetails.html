@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <script src="../template_css/includeTemplate.js"></script>
-<body>
 <div w3-include-html="../drTemplate.html"></div>
 
 <style>
     .btn-group .button {
-        background-color: #2A4480;
+        background-color: #008000;
         border: 1px solid green;
         color: white;
         padding: 15px 32px;
@@ -28,20 +27,32 @@
 </style>
 
 </head>
+<h2>Update Patient Details</h2>
 
 
-<h2>Doctor patient Page</h2>
+<form action="/action_page.php">
+    First name:<br>
+    <input type="text" name="firstname">
+    <br>
+    Last name:<br>
+    <input type="text" name="lastname">
+    <br>
+    Date of Birth:<br>
+    <input type="text" name="Date of Birth">
+    <br>
+    Occupation:<br>
+    <input type="text" name="Occupation">
+    <br>
+    Email:<br>
+    <input type="text" name="Email">
+    <br>
 
-<div class="btn-group">
-    <a href="SearchPatient.html"><button class="button">View Patient Details</button></a>
-    <a href="Updatepatientdetails.html"><button class="button">Update Patient Details</button></a>
-    <a href="ViewPrescription.html"><button class="button">View Prescription</button></a>
-    <a href="ViewAditionalDetails.html"> <button class="button">View Additional Details</button></a>
-</div>
+    <br>
+    <button type="submit">Update</button>
+</form>
 
 
-<script>
-    includeHTML();
-</script>
+
+
 </body>
 </html>
