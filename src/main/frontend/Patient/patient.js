@@ -19,10 +19,10 @@ function prescription() {
         if (response.valid === true) {
             var prescription = response.prescription;
            //document.write(JSON.stringify(prescription));
-           // alert(JSON.stringify(prescription));
+          // alert(JSON.stringify(prescription));
             //document.write(prescription);
             //redirect();
-            document.getElementById("Prescription").innerHTML = JSON.stringify(prescription)
+            document.getElementById("result").innerHTML = JSON.stringify(prescription)
         }
 
 
