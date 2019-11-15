@@ -18,9 +18,11 @@ function prescription() {
         var response = getPrescription(input);
         if (response.valid === true) {
             var prescription = response.prescription;
-            alert("you have screwed yourself")
-            return prescription;
+           //document.write(JSON.stringify(prescription));
+           // alert(JSON.stringify(prescription));
+            //document.write(prescription);
             //redirect();
+            document.getElementById("Prescription").innerHTML = JSON.stringify(prescription)
         }
 
 
