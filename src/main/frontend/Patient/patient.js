@@ -1,32 +1,42 @@
-
-//Relates to only button
-$( "Prescription" ).click(function() {
-    prescription();
-})
-
-var baseUrl = "http://localhost:63343";
-var final_response;
-var input = {};
 //input.patient_id =  $("#user-menu-link").attr("title");;
-input.patient_id =  24;
 
-//Basic method to make call to server, using the id info offered on login GUI.
-function prescription(input) {
-    $.ajax({
-        type: "POST",
-        url: baseUrl + "/prescription",
-        data: JSON.parse(input),
-        dataType: "json",
-        contentType: "application/json; charset=utf-8",
-        async: false,
-        cache: false,
-        success: function (response) {
-            final_response = response;
-        },
-        error: function () {
-            alert("Error on server side!")
+$("#Prescription").on('click',(function ()
+{
+         prescription();
+}));
+
+function prescription() {
+    //var patient_id =  $("#user-menu-link").attr("title");
+
+    var patient_id = "24"
+    if (patient_id === "") {
+
+        alert("Not able to retrieve patient id");
+    } else {
+        var input = {};
+        input.patient_id = patient_id;
+        var response = getPrescription(input);
+        if (response.valid === true) {
+            var prescription = response.prescription;
+            alert("you have screwed yourself")
+            return prescription;
+            //redirect();
         }
-    });
-    return final_response;
-}
 
+
+    }
+
+//Hiding the box that will be used to display warning
+    $("#alert-box").hide();
+
+//Function to get rid of alert after displaying it.
+// let bootstrap_alert;
+    bootstrap_alert = function () {
+    }
+    bootstrap_alert.warning = function (message) {
+        document.getElementById("alert-box").innerHTML = message;
+        $("#alert-box").fadeTo(2000, 500).slideUp(500, function () {
+            $("#alert-box").slideUp(500);
+        });
+    }
+}
