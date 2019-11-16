@@ -71,4 +71,12 @@ public class HttpController {
          
     	adminManager.addUser();
     }
+    
+    @RequestMapping(value = "/deleteUser", method = RequestMethod.POST)
+    //@CrossOrigin(origins = crossOrigin)
+    public void deleteUser(@RequestParam(name = "id") String id) {
+    	 logger.info("HTTP client received Delete-User Request");
+         
+    	adminManager.deleteUser(Integer.parseInt(id));
+    }
 }

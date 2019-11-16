@@ -44,4 +44,8 @@ public class AdminManager {
     	user.setName("John");
     	databaseController.insertUser(user);
     }
+    
+    public void deleteUser(int id) {
+    	databaseController.deleteUser(id);
+    }
 }
