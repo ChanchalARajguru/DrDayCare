@@ -11,6 +11,7 @@ import javax.persistence.Id;
 public class Prescription {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id;
 
     private Integer patient_id;
 
@@ -25,6 +26,9 @@ public class Prescription {
     private String prescription_details;
 
     private boolean prescription_claimed;
+    public Integer getId() {
+        return id;
+    }
     public Integer getPatient_id() {return patient_id; }
 
       public void setPatient_id(Integer patient_id) {
