@@ -1,5 +1,9 @@
 package eu.teama.drdaycare.HttpClient;
 
+import eu.teama.drdaycare.EmergencyId.EmergencyIdManager;
+import eu.teama.drdaycare.EmergencyId.json.EmergencyIdRequest;
+import eu.teama.drdaycare.EmergencyId.json.EmergencyIdResponse;
+
 import eu.teama.drdaycare.Login.jsonData.LoginRequest;
 import eu.teama.drdaycare.Login.jsonData.LoginResponse;
 import eu.teama.drdaycare.Login.LoginManager;
@@ -26,6 +30,9 @@ public class HttpController {
     @Autowired
     private PrescriptionManager prescriptionManager;
 
+    @Autowired
+    private EmergencyIdManager emergencyIdManager;
+
     //Takes a POST request over at address $System_IP/login (ie http://localhost:8080/login if run on local system) with a JSON login request in the body
     //Method takes in a loginRequest, gives information to LoginManager and then returns the loginResponse it receives from the manager.
     @RequestMapping(value = "/login", method = RequestMethod.POST)
@@ -42,4 +49,13 @@ public class HttpController {
         logger.info("HTTP client received Prescription Request" + prescriptionRequest.getPatient_id());
         return prescriptionManager.getPrescription(prescriptionRequest);
     }
+    //Takes a POST request over at address $System_IP/emergecyId(ie http://localhost:8080/emergencyId if run on local system) with a JSON emergencyId request in the body
+    //Method takes in a EmergencyId Request, gives information to EmergencyIdManager and then returns the emergencyId Response it receives from the manager.
+    @RequestMapping(value = "/emergencyId", method = RequestMethod.POST)
+    @CrossOrigin(origins = crossOrigin)
+    public EmergencyIdResponse getEmergencyId(@RequestBody EmergencyIdRequest emergencyIdRequest) throws SQLException {
+        logger.info("HTTP client received EmergencyId Request" + emergencyIdRequest.getPatient_id());
+        return EmergencyIdManager.getEmergencyId(emergencyIdRequest);
+    }
+
 }

@@ -1,5 +1,7 @@
 package eu.teama.drdaycare.DatabaseHandler;
+import eu.teama.drdaycare.UserTypes.Patient;
 import eu.teama.drdaycare.UserTypes.Prescription;
+import eu.teama.drdaycare.UserTypes.Patient;
 import eu.teama.drdaycare.UserTypes.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,7 +18,11 @@ public class DatabaseController {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private EmergencyIdRepository emergencyIdRepository;
+
     @Autowired PrescriptionRepository prescriptionRepository;
+
 
     //Inserting user into repository, making use of the the repository interfaces built in save functionality.
     public void insertUser(User user){
@@ -75,12 +81,19 @@ public class DatabaseController {
         return count;
     }
 
-    //Returning an iterable of prescriptions based on patient_id given. Makes use of custom made query method in userRepository.
+    //Returning an iterable of prescriptions based on patient_id given. Makes use of custom made query method in PrescriptionRepository.
     public Iterable<Prescription> getAllPrescriptions(){
         logger.info("Attempting to return all Prescription");
         Iterable<Prescription> prescriptions = prescriptionRepository.findAll();
         logger.info("Returning  prescriptions from repository");
         return prescriptions;
     }
-    
+    //Returning an iterable of EmergencyId based on patient_id given. Makes use of custom made query method in EmergencyIdRepository.
+
+    public Iterable<Patient> getAllEmergencyIds() {
+        logger.info("Attempting to return all EmergencyId");
+        Iterable<Patient> emergencyIds = emergencyIdRepository.findAll();
+        logger.info("Returning  emergencyIds from repository");
+        return emergencyIds;
+    }
 }
