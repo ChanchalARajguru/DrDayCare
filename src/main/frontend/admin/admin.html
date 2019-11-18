@@ -128,11 +128,14 @@ $(document).ready(function() {
 			<!-- Search form -->
 			<input class="form-control" type="text" placeholder="Search"
 				aria-label="Search">
+			<button type="button" class="row" data-toggle="modal">
+				Search <span class="glyphicon glyphicon-plus"></span>
+			</button>
 		</div>
 		<button type="button"
-			class="row col-md-offset-9 btn btn-success mr-top "
+			class="row col-md-offset-9 btn float-right btn-success mr-top "
 			data-toggle="modal" data-target="#myModal">
-			Add Users <span class="glyphicon glyphicon-plus"></span>
+			Add User<span class="glyphicon glyphicon-plus"></span>
 		</button>
 		<!--<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>-->
 		<!-- Modal -->
@@ -147,20 +150,19 @@ $(document).ready(function() {
 					<div class="modal-body">
 						<form action="/action_page.php">
 							<div class="form-group">
-								<label for="name">Name:</label> <input type="input"
-									class="form-control" id="name" />
-							</div>
-							<div class="form-group">
-								<label for="emergencyid">Email Id:</label> <input
-									type="input" class="form-control" id="emergencyid" />
-							</div>
-							<div class="form-group">
-								<label for="age">Age:</label> <input type="input"
-									class="form-control" id="age" />
-							</div>
-							<div class="form-group">
-								<label for="address">Address:</label>
-								<textarea class="form-control" rows="5" id="address"></textarea>
+
+								<label for="userid">User Id:</label> <input type="input"
+									class="form-control" id="name" /> <label for="name">Name:</label>
+								<input type="input" class="form-control" id="name" /> <label
+									for="email-id">Email Id:</label> <input type="input"
+									class="form-control" id="email-id" /> <label for="type">User
+									Type (select one):</label> <select class="form-control" id="type">
+									<option>GP</option>
+									<option>Patient</option>
+									<option>Pharmacist</option>
+									<option>Other Staff</option>
+								</select> <br>
+
 							</div>
 							<button type="submit" class="btn btn-success">Submit</button>
 						</form>
@@ -192,7 +194,7 @@ $(document).ready(function() {
 
 					<div class="row">
 
-						<div class="col-sm-3">
+						<div class="col-sm-2">
 							<img class="img-thumbnail" src="https://i.pravatar.cc/300"
 								height="142" width="142" alt="profile 1">
 						</div>
@@ -206,9 +208,20 @@ $(document).ready(function() {
 								type specimen book.</p>
 
 						</div>
-						<div id="solTitle" class="col-sm-1">
-							<a href="#" class="btn btn-primary">Edit</a>
+						<div id="solTitle" class="col-sm-2">
+
+							<table class="table">
+								<tbody>
+									<tr>
+										<td><a href="#" class="btn btn-primary">Edit</a></td>
+									</tr>
+									<tr>
+										<td><a href="#" class="btn btn-primary">Deactivate</a></td>
+									</tr>
+								</tbody>
+							</table>
 						</div>
+
 					</div>
 				</div>
 			</li>
@@ -217,7 +230,7 @@ $(document).ready(function() {
 					<!-- <img class="card-img-top" src="" alt="profile 2"> -->
 					<div class="row">
 
-						<div class="col-sm-3">
+						<div class="col-sm-2">
 							<img class="img-thumbnail" src="https://i.pravatar.cc/300"
 								height="142" width="142" alt="profile 1">
 						</div>
@@ -231,8 +244,17 @@ $(document).ready(function() {
 								type specimen book.</p>
 
 						</div>
-						<div class="col-sm-1">
-							<a href="#" class="btn btn-primary">Edit</a>
+						<div class="col-sm-2">
+							<table class="table">
+								<tbody>
+									<tr>
+										<td><a href="#" class="btn btn-primary">Edit</a></td>
+									</tr>
+									<tr>
+										<td><a href="#" class="btn btn-primary">Deactivate</a></td>
+									</tr>
+								</tbody>
+							</table>
 						</div>
 					</div>
 
@@ -242,7 +264,7 @@ $(document).ready(function() {
 				<div class="card">
 					<div class="row">
 
-						<div class="col-sm-3">
+						<div class="col-sm-2">
 							<img class="img-thumbnail" src="https://i.pravatar.cc/300"
 								height="142" width="142" alt="profile 1">
 						</div>
@@ -255,8 +277,17 @@ $(document).ready(function() {
 								unknown printer took a galley of type and scrambled it to make a
 								type specimen book.</p>
 						</div>
-						<div class="col-sm-1">
-							<a href="#" class="btn btn-primary">Edit</a>
+						<div class="col-sm-2">
+							<table class="table">
+								<tbody>
+									<tr>
+										<td><a href="#" class="btn btn-primary">Edit</a></td>
+									</tr>
+									<tr>
+										<td><a href="#" class="btn btn-primary">Deactivate</a></td>
+									</tr>
+								</tbody>
+							</table>
 						</div>
 					</div>
 				</div>
@@ -265,7 +296,7 @@ $(document).ready(function() {
 				<div class="card">
 					<div class="row">
 
-						<div class="col-sm-3">
+						<div class="col-sm-2">
 							<img class="img-thumbnail" src="https://i.pravatar.cc/300"
 								height="142" width="142" alt="profile 1">
 						</div>
@@ -279,8 +310,17 @@ $(document).ready(function() {
 								type specimen book.</p>
 
 						</div>
-						<div class="col-sm-1">
-							<a href="#" class="btn btn-primary">Edit</a>
+						<div class="col-sm-2">
+							<table class="table">
+								<tbody>
+									<tr>
+										<td><a href="#" class="btn btn-primary">Edit</a></td>
+									</tr>
+									<tr>
+										<td><a href="#" class="btn btn-primary">Deactivate</a></td>
+									</tr>
+								</tbody>
+							</table>
 						</div>
 					</div>
 				</div>
@@ -289,7 +329,7 @@ $(document).ready(function() {
 				<div class="card">
 					<div class="row">
 
-						<div class="col-sm-3">
+						<div class="col-sm-2">
 							<img class="img-thumbnail" src="https://i.pravatar.cc/300"
 								height="142" width="142" alt="profile 1">
 						</div>
@@ -303,8 +343,17 @@ $(document).ready(function() {
 								type specimen book.</p>
 
 						</div>
-						<div class="col-sm-1">
-							<a href="#" class="btn btn-primary">Edit</a>
+						<div class="col-sm-2">
+							<table class="table">
+								<tbody>
+									<tr>
+										<td><a href="#" class="btn btn-primary">Edit</a></td>
+									</tr>
+									<tr>
+										<td><a href="#" class="btn btn-primary">Deactivate</a></td>
+									</tr>
+								</tbody>
+							</table>
 						</div>
 					</div>
 
