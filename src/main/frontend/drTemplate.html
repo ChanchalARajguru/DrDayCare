@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <link rel="stylesheet" href="../template_css/bootstrap.min.css" />
-        <link rel="stylesheet"  href="../template_css/bootstrap.min.css" />
-        <script src="../template_css/jquery.min.js"></script>
-        <script src="../template_css/bootstrap.min.js"></script>
-        <link rel="stylesheet" href="../template_css/template.css" />
+        <link rel="stylesheet" href="template_css/bootstrap.min.css" />
+        <link rel="stylesheet"  href="template_css/bootstrap.min.css" />
+        <script src="template_css/jquery.min.js"></script>
+        <script src="template_css/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="template_css/template.css" />
+        <script src = "login/redirect.js"></script>
+        <script src = "cookieHandler.js"></script>
+        <script src = "login/logout.js"></script>
     </head>
     <body>
         <nav class="navbar navbar-inverse">
@@ -19,11 +22,10 @@
                     <li><a href="#">Page 2</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+                    <li><a href="#" onclick="logout()"> Logout</a></li>
                 </ul>
             </div>
         </nav>
-        <footer class="fixed-bottom text-center txtwhite">
         <footer class="fixed-bottom text-center txtwhite over">
             <p class="">&copy; Dr DayCare Terms & Conditions apply.</p>
         </footer>
