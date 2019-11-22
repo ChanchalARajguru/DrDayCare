@@ -1,2 +1,2 @@
-Delete from 'user'
-    where 'id' = 1;
+Delete from `user`
+    where 1;

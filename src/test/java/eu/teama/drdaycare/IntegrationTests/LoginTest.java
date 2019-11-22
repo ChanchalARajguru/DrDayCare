@@ -33,7 +33,7 @@ public class LoginTest {
 
     @Test
     @Sql(scripts = {"classpath:dataForTests/login-h2.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
-//    @Sql(scripts = {"classpath:dataForTests/loginCleanup-h2.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
+    @Sql(scripts = {"classpath:dataForTests/loginCleanup-h2.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     public void testLoginWithValidUser() throws Exception {
         LoginRequest validRequest = new LoginRequest("User", "Password");
         String validRequestJson = mapper.writeValueAsString(validRequest);
@@ -48,7 +48,6 @@ public class LoginTest {
 
         MvcResult result = resultActions.andReturn();
         String jsonResponse = result.getResponse().getContentAsString();
-
 
         assertEquals(jsonResponse, expectJsonResponse);
     }
@@ -70,6 +69,14 @@ public class LoginTest {
         String jsonResponse = result.getResponse().getContentAsString();
 
         assertEquals(jsonResponse, expectJsonResponse);
+    }
+
+    @Test
+    public void checkLoginWithoutUser() throws Exception{
+        mockMvc.perform(post("/login")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(""))
+                .andExpect(status().is4xxClientError());
     }
 }
 

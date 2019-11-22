@@ -11,6 +11,9 @@ import eu.teama.drdaycare.admin.AdminManager;
 import eu.teama.drdaycare.admin.UserListResponse;
 import eu.teama.drdaycare.Prescription.PrescriptionManager;
 
+import eu.teama.drdaycare.comment.Comment;
+import eu.teama.drdaycare.comment.CommentManager;
+import eu.teama.drdaycare.comment.CommentRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +38,9 @@ public class HttpController {
     @Autowired
     private AdminManager adminManager;
 
+    @Autowired
+    private CommentManager commentManager;
+
     //Takes a POST request over at address $System_IP/login (ie http://localhost:8080/login if run on local system) with a JSON login request in the body
     //Method takes in a loginRequest, gives information to LoginManager and then returns the loginResponse it receives from the manager.
     @RequestMapping(value = "/login", method = RequestMethod.POST)
@@ -43,6 +49,7 @@ public class HttpController {
         logger.info("HTTP client received Login Request" + loginRequest.getName() + " " + loginRequest.getPassword());
         return loginManager.checkLogin(loginRequest);
     }
+
     //Takes a POST request over at address $System_IP/login (ie http://localhost:8080/prescription if run on local system) with a JSON prescription request in the body
     //Method takes in a Prescription Request, gives information to PrescriptionManager and then returns the loginResponse it receives from the manager.
     @RequestMapping(value = "/prescription", method = RequestMethod.POST)
@@ -78,5 +85,13 @@ public class HttpController {
     	 logger.info("HTTP client received Delete-User Request");
          
     	adminManager.deleteUser(Integer.parseInt(id));
+    }
+
+    @RequestMapping(value = "pharmacist/addComment", method = RequestMethod.POST)
+    //@CrossOrigin(origins = crossOrigin)
+    public void addComment(@RequestBody CommentRequest commentRequest) {
+        logger.info("HTTP client received request to add comment");
+
+        commentManager.addComment(commentRequest);
     }
 }

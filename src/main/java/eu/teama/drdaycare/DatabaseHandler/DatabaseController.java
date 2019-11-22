@@ -1,6 +1,8 @@
 package eu.teama.drdaycare.DatabaseHandler;
 import eu.teama.drdaycare.UserTypes.Prescription;
 import eu.teama.drdaycare.UserTypes.User;
+import eu.teama.drdaycare.comment.Comment;
+import eu.teama.drdaycare.comment.CommentRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,9 @@ public class DatabaseController {
     private UserRepository userRepository;
 
     @Autowired PrescriptionRepository prescriptionRepository;
+
+    @Autowired
+    private CommentRepository commentRepository;
 
     //Inserting user into repository, making use of the the repository interfaces built in save functionality.
     public void insertUser(User user){
@@ -82,5 +87,10 @@ public class DatabaseController {
         logger.info("Returning  prescriptions from repository");
         return prescriptions;
     }
-    
+
+    public void addComment(Comment comment){
+        logger.info("Attempting to add comment to database");
+        commentRepository.save(comment);
+        logger.info("Comment added to database");
+    }
 }
