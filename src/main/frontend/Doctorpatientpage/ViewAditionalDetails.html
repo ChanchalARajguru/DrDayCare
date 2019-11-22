@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<script src="../template_css/includeTemplate.js"></script>
+<body>
+<div w3-include-html="../drTemplate.html"></div>
+
+<style>
+    .btn-group .button {
+        background-color: #353880;
+        border: 1px solid green;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        font-size: 16px;
+        cursor: pointer;
+        width: 250px;
+        display: block;
+    }
+
+    .btn-group .button:not(:last-child) {
+        border-bottom: none; /* Prevent double borders */
+    }
+
+    .btn-group .button:hover {
+        background-color: #3e8e41;
+    }
+</style>
+</head>
+<body>
+
+
+
+<div class="btn-group">
+    <button class="button">View Allergies</button>
+    <button class="button">Patient Medications</button>
+
+</div>
+
+
+<script>
+    includeHTML();
+</script>
+
