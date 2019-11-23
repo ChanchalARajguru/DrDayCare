@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<script src="../template_css/includeTemplate.js"></script>
+<script src = "../dataService.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<body>
+<div w3-include-html="../drTemplate.html"></div>
+
+<style>
+.btn-group .button {
+  background-color: #0000FF;
+  border: 1px solid yellow;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  cursor: pointer;
+  width: 250px;
+  display: block;
+}
+
+.btn-group .button:not(:last-child) {
+  border-bottom: none; /* Prevent double borders */
+}
+
+.btn-group .button:hover {
+  background-color: #000000;
+}
+</style>
+</head>
+
+<h2>Dr Day Care</h2>
+
+<div class="btn-group">
+    <button class="button">Access info about patient</button>
+    <button class="button">View User accounts</button>
+    <button class="button">read and confirm additional information</button>
+    <button class="button">Confirmation Email</button>
+    <script>
+        var jsonData = getallPatientdetails();
+//Make html table
+//Use jquery  to pu jsonData into html table
+
+    </script>
+</div>
+
+
+<script>
+    includeHTML();
+</script>
+</body>
+</html>
