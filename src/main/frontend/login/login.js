@@ -21,17 +21,11 @@ function login(){
 
         var response = checkLogin(input);
 
-        alert(JSON.stringify(response));
-
         if (response.valid === true){
             var user = response.user;
-            switch (user.userRole) {
-                case 1: window.location.replace("dummy_pages/dummy1.html"); break;
-                case 2: window.location.replace("dummy_pages/dummy2.html"); break;
-                case 3: window.location.replace("dummy_pages/dummy3.html"); break;
-                case 4: window.location.replace("dummy_pages/dummy4.html"); break;
-                case 5: window.location.replace("dummy_pages/dummy5.html"); break;
-            }
+
+            setUserCookie(user);
+            redirect();
         }
         else{
             bootstrap_alert.warning("Invalid username or password was given.");
@@ -43,6 +37,7 @@ function login(){
 $("#alert-box").hide();
 
 //Function to get rid of alert after displaying it.
+// let bootstrap_alert;
 bootstrap_alert = function() {}
 bootstrap_alert.warning = function(message) {
     document.getElementById("alert-box").innerHTML = message;
@@ -50,6 +45,3 @@ bootstrap_alert.warning = function(message) {
         $("#alert-box").slideUp(500);
     });
 };
-
-
-
