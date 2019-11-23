@@ -14,6 +14,7 @@
 }
 </style>
 <!-- Bootstrap CSS -->
+<script src="../template_css/includeTemplate.js"></script>
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
 	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
@@ -31,7 +32,10 @@
 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
 	integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
 	crossorigin="anonymous"></script>
+<script src="../dataService.js"></script>
 
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
 function addUser(){
     
@@ -53,6 +57,23 @@ function addUser(){
             bootstrap_alert.warning("Invalid username or password was given.");
         }
    
+}
+function allUsers(){
+    
+        var response = getUsers();
+
+        if (response.valid === true){
+        	bootstrap_alert.warning("username or password was given.");
+//            var user = response.user;
+
+  //          setUserCookie(user);
+    //        redirect();
+        }
+        else{
+            bootstrap_alert.warning("Invalid username or password was given.");
+        }
+    
+
 }
 function addUser1() {
     $.ajax({
@@ -85,6 +106,8 @@ bootstrap_alert.warning = function(message) {
 };
 
 $(document).ready(function() {
+	
+	allUsers();
     $("#solTitle a").click(function() {
         
     });
@@ -105,6 +128,50 @@ $(document).ready(function() {
 			<!-- Search form -->
 			<input class="form-control" type="text" placeholder="Search"
 				aria-label="Search">
+			<button type="button" class="row" data-toggle="modal">
+				Search <span class="glyphicon glyphicon-plus"></span>
+			</button>
+		</div>
+		<button type="button"
+			class="row col-md-offset-9 btn float-right btn-success mr-top "
+			data-toggle="modal" data-target="#myModal">
+			Add User<span class="glyphicon glyphicon-plus"></span>
+		</button>
+		<!--<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>-->
+		<!-- Modal -->
+		<div class="modal fade" id="myModal" role="dialog">
+			<div class="modal-dialog">
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">Add User</h4>
+					</div>
+					<div class="modal-body">
+						<form action="/action_page.php">
+							<div class="form-group">
+
+								<label for="userid">User Id:</label> <input type="input"
+									class="form-control" id="name" /> <label for="name">Name:</label>
+								<input type="input" class="form-control" id="name" /> <label
+									for="email-id">Email Id:</label> <input type="input"
+									class="form-control" id="email-id" /> <label for="type">User
+									Type (select one):</label> <select class="form-control" id="type">
+									<option>GP</option>
+									<option>Patient</option>
+									<option>Pharmacist</option>
+									<option>Other Staff</option>
+								</select> <br>
+
+							</div>
+							<button type="submit" class="btn btn-success">Submit</button>
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					</div>
+				</div>
+			</div>
 		</div>
 		<nav aria-label="Page navigation example">
 			<ul class="pagination justify-content-center">
@@ -127,12 +194,12 @@ $(document).ready(function() {
 
 					<div class="row">
 
-						<div class="col-sm-3">
+						<div class="col-sm-2">
 							<img class="img-thumbnail" src="https://i.pravatar.cc/300"
 								height="142" width="142" alt="profile 1">
 						</div>
 						<div class="col-sm-8 card-body">
-							<h5 class="card-title">Patient 1</h5>
+							<h5 class="card-title">User 1</h5>
 
 							<p class="card-text">Lorem Ipsum is simply dummy text of the
 								printing and typesetting industry. Lorem Ipsum has been the
@@ -141,23 +208,100 @@ $(document).ready(function() {
 								type specimen book.</p>
 
 						</div>
-						<div id = "solTitle" class="col-sm-1">
-							<a href="#" class="btn btn-primary" >Edit</a>
+						<div id="solTitle" class="col-sm-2">
+
+							<table class="table">
+								<tbody>
+									<tr>
+										<td><a href="#" class="btn btn-primary">Edit</a></td>
+									</tr>
+									<tr>
+										<td><a href="#" class="btn btn-primary">Deactivate</a></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+
+					</div>
+				</div>
+			</li>
+			<li class="list-group-item">
+				<div class="card">
+					<!-- <img class="card-img-top" src="" alt="profile 2"> -->
+					<div class="row">
+
+						<div class="col-sm-2">
+							<img class="img-thumbnail" src="https://i.pravatar.cc/300"
+								height="142" width="142" alt="profile 1">
+						</div>
+						<div class="col-sm-8 card-body">
+							<h5 class="card-title">User 2</h5>
+
+							<p class="card-text">Lorem Ipsum is simply dummy text of the
+								printing and typesetting industry. Lorem Ipsum has been the
+								industry's standard dummy text ever since the 1500s, when an
+								unknown printer took a galley of type and scrambled it to make a
+								type specimen book.</p>
+
+						</div>
+						<div class="col-sm-2">
+							<table class="table">
+								<tbody>
+									<tr>
+										<td><a href="#" class="btn btn-primary">Edit</a></td>
+									</tr>
+									<tr>
+										<td><a href="#" class="btn btn-primary">Deactivate</a></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+
+				</div>
+			</li>
+			<li class="list-group-item">
+				<div class="card">
+					<div class="row">
+
+						<div class="col-sm-2">
+							<img class="img-thumbnail" src="https://i.pravatar.cc/300"
+								height="142" width="142" alt="profile 1">
+						</div>
+						<div class="col-sm-8 card-body">
+							<h5 class="card-title">User 3</h5>
+
+							<p class="card-text">Lorem Ipsum is simply dummy text of the
+								printing and typesetting industry. Lorem Ipsum has been the
+								industry's standard dummy text ever since the 1500s, when an
+								unknown printer took a galley of type and scrambled it to make a
+								type specimen book.</p>
+						</div>
+						<div class="col-sm-2">
+							<table class="table">
+								<tbody>
+									<tr>
+										<td><a href="#" class="btn btn-primary">Edit</a></td>
+									</tr>
+									<tr>
+										<td><a href="#" class="btn btn-primary">Deactivate</a></td>
+									</tr>
+								</tbody>
+							</table>
 						</div>
 					</div>
 				</div>
 			</li>
 			<li class="list-group-item">
-			<div class="card">
-					<!-- <img class="card-img-top" src="" alt="profile 2"> -->
+				<div class="card">
 					<div class="row">
 
-						<div class="col-sm-3">
+						<div class="col-sm-2">
 							<img class="img-thumbnail" src="https://i.pravatar.cc/300"
 								height="142" width="142" alt="profile 1">
 						</div>
 						<div class="col-sm-8 card-body">
-							<h5 class="card-title">Patient 2</h5>
+							<h5 class="card-title">User 4</h5>
 
 							<p class="card-text">Lorem Ipsum is simply dummy text of the
 								printing and typesetting industry. Lorem Ipsum has been the
@@ -166,44 +310,31 @@ $(document).ready(function() {
 								type specimen book.</p>
 
 						</div>
-						<div class="col-sm-1">
-							<a href="#" class="btn btn-primary">Edit</a>
+						<div class="col-sm-2">
+							<table class="table">
+								<tbody>
+									<tr>
+										<td><a href="#" class="btn btn-primary">Edit</a></td>
+									</tr>
+									<tr>
+										<td><a href="#" class="btn btn-primary">Deactivate</a></td>
+									</tr>
+								</tbody>
+							</table>
 						</div>
 					</div>
-
-				</div></li>
+				</div>
+			</li>
 			<li class="list-group-item">
-			<div class="card">
+				<div class="card">
 					<div class="row">
 
-						<div class="col-sm-3">
+						<div class="col-sm-2">
 							<img class="img-thumbnail" src="https://i.pravatar.cc/300"
 								height="142" width="142" alt="profile 1">
 						</div>
 						<div class="col-sm-8 card-body">
-							<h5 class="card-title">Patient 3</h5>
-
-							<p class="card-text">Lorem Ipsum is simply dummy text of the
-								printing and typesetting industry. Lorem Ipsum has been the
-								industry's standard dummy text ever since the 1500s, when an
-								unknown printer took a galley of type and scrambled it to make a
-								type specimen book.</p>
-						</div>
-						<div class="col-sm-1">
-							<a href="#" class="btn btn-primary">Edit</a>
-						</div>
-					</div>
-				</div></li>
-			<li class="list-group-item">
-			<div class="card">
-					<div class="row">
-
-						<div class="col-sm-3">
-							<img class="img-thumbnail" src="https://i.pravatar.cc/300"
-								height="142" width="142" alt="profile 1">
-						</div>
-						<div class="col-sm-8 card-body">
-							<h5 class="card-title">Patient 4</h5>
+							<h5 class="card-title">User 5</h5>
 
 							<p class="card-text">Lorem Ipsum is simply dummy text of the
 								printing and typesetting industry. Lorem Ipsum has been the
@@ -212,35 +343,22 @@ $(document).ready(function() {
 								type specimen book.</p>
 
 						</div>
-						<div class="col-sm-1">
-							<a href="#" class="btn btn-primary">Edit</a>
-						</div>
-					</div>
-				</div></li>
-			<li class="list-group-item">
-			<div class="card">
-					<div class="row">
-
-						<div class="col-sm-3">
-							<img class="img-thumbnail" src="https://i.pravatar.cc/300"
-								height="142" width="142" alt="profile 1">
-						</div>
-						<div class="col-sm-8 card-body">
-							<h5 class="card-title">Patient 5</h5>
-
-							<p class="card-text">Lorem Ipsum is simply dummy text of the
-								printing and typesetting industry. Lorem Ipsum has been the
-								industry's standard dummy text ever since the 1500s, when an
-								unknown printer took a galley of type and scrambled it to make a
-								type specimen book.</p>
-
-						</div>
-						<div class="col-sm-1">
-							<a href="#" class="btn btn-primary">Edit</a>
+						<div class="col-sm-2">
+							<table class="table">
+								<tbody>
+									<tr>
+										<td><a href="#" class="btn btn-primary">Edit</a></td>
+									</tr>
+									<tr>
+										<td><a href="#" class="btn btn-primary">Deactivate</a></td>
+									</tr>
+								</tbody>
+							</table>
 						</div>
 					</div>
 
-				</div></li>
+				</div>
+			</li>
 		</ul>
 	</div>
 </body>
