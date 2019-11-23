@@ -1,6 +1,7 @@
 package eu.teama.drdaycare.DatabaseHandler;
 
 import eu.teama.drdaycare.UserTypes.User;
+import eu.teama.drdaycare.UserTypes.Patient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,9 @@ public class DatabaseController {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private PatientRepository patientRepository;
 
     //Inserting user into repository, making use of the the repository interfaces built in save functionality.
     public void insertUser(User user){
@@ -72,5 +76,10 @@ public class DatabaseController {
         }
         return count;
     }
-    
+
+    public Iterable<Patient> getAllPatients() {
+        logger.info("Attempting to return all patients");
+        Iterable<Patient> patients = patientRepository.findAll();
+        return patients;
+    }
 }

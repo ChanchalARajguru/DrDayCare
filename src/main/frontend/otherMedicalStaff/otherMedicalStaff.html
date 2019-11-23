@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <script src="../template_css/includeTemplate.js"></script>
+<script src = "../dataService.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <body>
 <div w3-include-html="../drTemplate.html"></div>
 
@@ -35,7 +37,12 @@
     <button class="button">View User accounts</button>
     <button class="button">read and confirm additional information</button>
     <button class="button">Confirmation Email</button>
+    <script>
+        var jsonData = getallPatientdetails();
+//Make html table
+//Use jquery  to pu jsonData into html table
 
+    </script>
 </div>
 
 
