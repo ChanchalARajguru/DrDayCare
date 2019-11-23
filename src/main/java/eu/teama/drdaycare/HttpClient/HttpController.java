@@ -6,6 +6,7 @@ import eu.teama.drdaycare.Login.LoginManager;
 
 import eu.teama.drdaycare.Prescription.jsonData.PrescriptionRequest;
 import eu.teama.drdaycare.Prescription.jsonData.PrescriptionResponse;
+
 import eu.teama.drdaycare.UserTypes.User;
 import eu.teama.drdaycare.admin.AdminManager;
 import eu.teama.drdaycare.admin.UserListResponse;
@@ -31,7 +32,7 @@ public class HttpController {
 
     @Autowired
     private PrescriptionManager prescriptionManager;
-    
+
     @Autowired
     private AdminManager adminManager;
 
