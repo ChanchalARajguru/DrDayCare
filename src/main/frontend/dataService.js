@@ -43,3 +43,23 @@ function getPrescription(input) {
      return final_response;
 
 }
+function getemergencyId(input) {
+    $.ajax({
+        type: "POST",
+        url: baseUrl + "/emergencyId",
+        data: JSON.stringify(input),
+        dataType: "json",
+        contentType: "application/json; charset=utf-8",
+        async: false,
+        cache: false,
+        success: function (response) {
+            final_response = response;
+        },
+        error: function () {
+            alert("Error on server side!")
+        }
+    });
+    //alert("The Prescription was clicked.");
+    return final_response;
+
+}
