@@ -8,7 +8,7 @@ $("#Prescription").on('click',(function ()
 function prescription() {
     //var patient_id =  $("#user-menu-link").attr("title");
 
-    var patient_id = "24"
+    var patient_id = "23"
     if (patient_id === "") {
 
         alert("Not able to retrieve patient id");
