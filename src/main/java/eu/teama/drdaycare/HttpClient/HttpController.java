@@ -55,7 +55,7 @@ public class HttpController {
     @CrossOrigin(origins = crossOrigin)
     public EmergencyIdResponse getEmergencyId(@RequestBody EmergencyIdRequest emergencyIdRequest) throws SQLException {
         logger.info("HTTP client received EmergencyId Request" + emergencyIdRequest.getPatient_id());
-        return EmergencyIdManager.getEmergencyId(emergencyIdRequest);
+        return emergencyIdManager.getEmergencyId(emergencyIdRequest);
     }
 
 }
