@@ -20,3 +20,40 @@ function checkLogin(input) {
     });
     return final_response;
 }
+
+function getallPatientdetails(){
+    $.ajax({
+        type: "GET",
+        url: baseUrl + "/MedicalStaff/allPatientdetails",
+
+        contentType: "application/json; charset=utf-8",
+        async: false,
+        cache: false,
+        success: function (response) {
+            final_response = response;
+        },
+        error: function () {
+            alert("Error on server side!")
+        }
+    });
+    return final_response;
+}
+
+function getUsers() {
+	
+    $.ajax({
+        
+        url: baseUrl + "/getAllUsers",
+
+        type: "GET",
+        context: document.body,
+        success: function (response) {
+            final_response = response;
+            alert("Success on server side!")
+        },
+        error: function (jqXHR,  textStatus,  errorThrown) {
+            alert("Error on server side!"+ textStatus + "=="+errorThrown +"=="+jqXHR)
+        }
+    });
+    return final_response;
+}

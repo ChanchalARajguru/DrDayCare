@@ -1,0 +1,4 @@
+function logout(){
+    deleteCookie();
+    redirect();
+}
