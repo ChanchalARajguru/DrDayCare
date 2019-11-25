@@ -3,9 +3,12 @@ package eu.teama.drdaycare.HttpClient;
 import eu.teama.drdaycare.Login.jsonData.LoginRequest;
 import eu.teama.drdaycare.Login.jsonData.LoginResponse;
 import eu.teama.drdaycare.Login.LoginManager;
+import eu.teama.drdaycare.medicalstaff.MedicalStaffManager;
+import eu.teama.drdaycare.UserTypes.Patient;
 
 import eu.teama.drdaycare.Prescription.jsonData.PrescriptionRequest;
 import eu.teama.drdaycare.Prescription.jsonData.PrescriptionResponse;
+
 import eu.teama.drdaycare.UserTypes.User;
 import eu.teama.drdaycare.additionalDetails.AdditionalDetails;
 import eu.teama.drdaycare.additionalDetails.AdditionalDetailsManager;
@@ -37,8 +40,11 @@ public class HttpController {
     private LoginManager loginManager;
 
     @Autowired
+    private MedicalStaffManager medicalStaffManager;
+  
+    @Autowired
     private PrescriptionManager prescriptionManager;
-    
+
     @Autowired
     private AdminManager adminManager;
 
@@ -48,6 +54,7 @@ public class HttpController {
     @Autowired
     private AdditionalDetailsManager additionalDetailsManager;
 
+
     //Takes a POST request over at address $System_IP/login (ie http://localhost:8080/login if run on local system) with a JSON login request in the body
     //Method takes in a loginRequest, gives information to LoginManager and then returns the loginResponse it receives from the manager.
     @RequestMapping(value = "/login", method = RequestMethod.POST)
@@ -56,6 +63,12 @@ public class HttpController {
         logger.info("HTTP client received Login Request" + loginRequest.getName() + " " + loginRequest.getPassword());
         return loginManager.checkLogin(loginRequest);
     }
+
+    @RequestMapping(value = "/MedicalStaff/allPatientdetails", method = RequestMethod.GET)
+    @CrossOrigin(origins = "http://localhost:63342")
+    public List<Patient> getAllPatientDetails() throws SQLException {
+        logger.info("HTTP client received Login Request");
+        return medicalStaffManager.getPatientList();}
 
     //Takes a POST request over at address $System_IP/login (ie http://localhost:8080/prescription if run on local system) with a JSON prescription request in the body
     //Method takes in a Prescription Request, gives information to PrescriptionManager and then returns the loginResponse it receives from the manager.
@@ -110,3 +123,5 @@ public class HttpController {
         return additionalDetailsList;
     }
 }
+
+

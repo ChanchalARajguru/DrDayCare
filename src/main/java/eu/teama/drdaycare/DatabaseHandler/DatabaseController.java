@@ -4,6 +4,7 @@ import eu.teama.drdaycare.UserTypes.User;
 import eu.teama.drdaycare.additionalDetails.AdditionalDetails;
 import eu.teama.drdaycare.comment.Comment;
 import eu.teama.drdaycare.comment.CommentRequest;
+import eu.teama.drdaycare.UserTypes.Patient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,9 @@ public class DatabaseController {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private PatientRepository patientRepository;
 
     @Autowired PrescriptionRepository prescriptionRepository;
 
@@ -82,6 +86,13 @@ public class DatabaseController {
             count++;
         }
         return count;
+    }
+
+
+    public Iterable<Patient> getAllPatients() {
+        logger.info("Attempting to return all patients");
+        Iterable<Patient> patients = patientRepository.findAll();
+        return patients;
     }
 
     //Returning an iterable of prescriptions based on patient_id given. Makes use of custom made query method in userRepository.

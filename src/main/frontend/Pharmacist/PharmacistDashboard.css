@@ -1,4 +1,3 @@
-
 .sidenav{
     height: 100%;
     width: 160px;
@@ -11,7 +10,7 @@
 }
 #mySidenav a {
     position: absolute;
-    left: -60px;
+    left: -50px;
     transition: 0.3s;
     padding: 10px;
     width: 120px;
