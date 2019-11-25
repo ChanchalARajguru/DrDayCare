@@ -1,6 +1,7 @@
 package eu.teama.drdaycare.DatabaseHandler;
 import eu.teama.drdaycare.UserTypes.Prescription;
 import eu.teama.drdaycare.UserTypes.User;
+import eu.teama.drdaycare.additionalDetails.AdditionalDetails;
 import eu.teama.drdaycare.comment.Comment;
 import eu.teama.drdaycare.comment.CommentRequest;
 import org.slf4j.Logger;
@@ -22,6 +23,9 @@ public class DatabaseController {
 
     @Autowired
     private CommentRepository commentRepository;
+
+    @Autowired
+    private AdditionalDetailsRepository additionalDetailsRepository;
 
     //Inserting user into repository, making use of the the repository interfaces built in save functionality.
     public void insertUser(User user){
@@ -92,5 +96,12 @@ public class DatabaseController {
         logger.info("Attempting to add comment to database");
         commentRepository.save(comment);
         logger.info("Comment added to database");
+    }
+
+    public Iterable <AdditionalDetails> getAdditionalDetailsForPatient(int patientId) {
+        logger.info("Attempting to return additional detials to patient with PatientID:" + patientId);
+        Iterable<AdditionalDetails> additionalDetails = additionalDetailsRepository.additionalDetailsForPatient(patientId);
+        logger.info("Returning additional details");
+        return additionalDetails;
     }
 }

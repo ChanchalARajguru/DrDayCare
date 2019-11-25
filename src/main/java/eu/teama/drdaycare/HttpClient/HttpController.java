@@ -7,6 +7,9 @@ import eu.teama.drdaycare.Login.LoginManager;
 import eu.teama.drdaycare.Prescription.jsonData.PrescriptionRequest;
 import eu.teama.drdaycare.Prescription.jsonData.PrescriptionResponse;
 import eu.teama.drdaycare.UserTypes.User;
+import eu.teama.drdaycare.additionalDetails.AdditionalDetails;
+import eu.teama.drdaycare.additionalDetails.AdditionalDetailsManager;
+import eu.teama.drdaycare.additionalDetails.AdditionalDetailsResponse;
 import eu.teama.drdaycare.admin.AdminManager;
 import eu.teama.drdaycare.admin.UserListResponse;
 import eu.teama.drdaycare.Prescription.PrescriptionManager;
@@ -23,6 +26,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLException;
+import java.util.List;
 
 @RestController
 public class HttpController {
@@ -40,6 +44,9 @@ public class HttpController {
 
     @Autowired
     private CommentManager commentManager;
+
+    @Autowired
+    private AdditionalDetailsManager additionalDetailsManager;
 
     //Takes a POST request over at address $System_IP/login (ie http://localhost:8080/login if run on local system) with a JSON login request in the body
     //Method takes in a loginRequest, gives information to LoginManager and then returns the loginResponse it receives from the manager.
@@ -74,8 +81,7 @@ public class HttpController {
     @RequestMapping(value = "/addUser", method = RequestMethod.POST)
     //@CrossOrigin(origins = crossOrigin)
     public void addUser() {
-    	 logger.info("HTTP client received Add-User Request");
-         
+        logger.info("HTTP client received Add-User Request");
     	adminManager.addUser();
     }
     
@@ -88,10 +94,19 @@ public class HttpController {
     }
 
     @RequestMapping(value = "pharmacist/addComment", method = RequestMethod.POST)
-    //@CrossOrigin(origins = crossOrigin)
+    @CrossOrigin(origins = crossOrigin)
     public void addComment(@RequestBody CommentRequest commentRequest) {
         logger.info("HTTP client received request to add comment");
-
         commentManager.addComment(commentRequest);
+    }
+
+    @RequestMapping(value = "doctor/getPatientAdditionalDetails/{patientId}", method = RequestMethod.GET)
+    @CrossOrigin(origins = crossOrigin)
+    public List<AdditionalDetails> getPatientDetails(@PathVariable ("patientId") final String patientId) {
+        logger.info("HTTP client received request to get additional details for patient with id: " + patientId);
+        List<AdditionalDetails> additionalDetailsList = additionalDetailsManager.getAdditionalDetailsForPatient(patientId);
+        logger.info("" + additionalDetailsList.size());
+
+        return additionalDetailsList;
     }
 }
