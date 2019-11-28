@@ -40,19 +40,41 @@ function getallPatientdetails(){
 }
 
 function getUsers() {
-	
-    $.ajax({
-        
-        url: baseUrl + "/getAllUsers",
 
+    $.ajax({
+
+        url: baseUrl + "/getAllUsers",
         type: "GET",
-        context: document.body,
+        responseType : 'json',
+        async: false,
+        cache: false,
+
         success: function (response) {
+            //console.log(final_response)
             final_response = response;
-            alert("Success on server side!")
+            return response;
         },
         error: function (jqXHR,  textStatus,  errorThrown) {
-            alert("Error on server side!"+ textStatus + "=="+errorThrown +"=="+jqXHR)
+            alert("Error on server side!")
+        }
+    });
+    return final_response;
+}
+
+function addUser(input) {
+    $.ajax({
+        type: "POST",
+        url: baseUrl + "/addUser",
+        data: JSON.stringify(input),
+        dataType: "json",
+        contentType: "application/json; charset=utf-8",
+        async: false,
+        cache: false,
+        success: function (response) {
+            final_response = response;
+        },
+        error: function () {
+            alert("Error on server side!")
         }
     });
     return final_response;

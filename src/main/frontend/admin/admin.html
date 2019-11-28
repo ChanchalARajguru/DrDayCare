@@ -15,6 +15,7 @@
 </style>
 <!-- Bootstrap CSS -->
 <script src="../template_css/includeTemplate.js"></script>
+
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
 	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
@@ -36,86 +37,13 @@
 
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script>
-function addUser(){
-    
-        var response = addUser1();
 
-        alert(JSON.stringify(response));
 
-        if (response.valid === true){
-            var user = response.user;
-            switch (user.userRole) {
-                case 1: window.location.replace("dummy_pages/dummy1.html"); break;
-                case 2: window.location.replace("dummy_pages/dummy2.html"); break;
-                case 3: window.location.replace("dummy_pages/dummy3.html"); break;
-                case 4: window.location.replace("dummy_pages/dummy4.html"); break;
-                case 5: window.location.replace("dummy_pages/dummy5.html"); break;
-            }
-        }
-        else{
-            bootstrap_alert.warning("Invalid username or password was given.");
-        }
-   
-}
-function allUsers(){
-    
-        var response = getUsers();
 
-        if (response.valid === true){
-        	bootstrap_alert.warning("username or password was given.");
-//            var user = response.user;
-
-  //          setUserCookie(user);
-    //        redirect();
-        }
-        else{
-            bootstrap_alert.warning("Invalid username or password was given.");
-        }
-    
-
-}
-function addUser1() {
-    $.ajax({
-        type: "POST",
-        url: baseUrl + "/addUser",
-        data: JSON.stringify(""),
-        dataType: "json",
-        contentType: "application/json; charset=utf-8",
-        async: false,
-        cache: false,
-        success: function (response) {
-            final_response = response;
-        },
-        error: function () {
-            alert("Error on server side!")
-        }
-    });
-    return final_response;
-}
-//Hiding the box that will be used to display warning
-$("#alert-box").hide();
-
-//Function to get rid of alert after displaying it.
-bootstrap_alert = function() {}
-bootstrap_alert.warning = function(message) {
-    document.getElementById("alert-box").innerHTML = message;
-    $("#alert-box").fadeTo(2000, 500).slideUp(500, function() {
-        $("#alert-box").slideUp(500);
-    });
-};
-
-$(document).ready(function() {
-	
-	allUsers();
-    $("#solTitle a").click(function() {
-        
-    });
-});
-</script>
-<title>Administrator!</title>
+<title>HSE - Admin</title>
 </head>
 <body>
+
 	<div class="container-fluid">
 		<div class="text-center">
 
@@ -148,19 +76,18 @@ $(document).ready(function() {
 						<h4 class="modal-title">Add User</h4>
 					</div>
 					<div class="modal-body">
-						<form action="/action_page.php">
+						<form onsubmit="addUserData()">
 							<div class="form-group">
 
-								<label for="userid">User Id:</label> <input type="input"
-									class="form-control" id="name" /> <label for="name">Name:</label>
-								<input type="input" class="form-control" id="name" /> <label
-									for="email-id">Email Id:</label> <input type="input"
-									class="form-control" id="email-id" /> <label for="type">User
-									Type (select one):</label> <select class="form-control" id="type">
-									<option>GP</option>
-									<option>Patient</option>
-									<option>Pharmacist</option>
-									<option>Other Staff</option>
+								<label for="userid">User Id:</label> <input type="input" class="form-control" id="userid" />
+								<label for="name" >Name:</label><input type="input" class="form-control" id="name" />
+								<label for="email-id">Email Id:</label> <input type="input" class="form-control" id="email-id" />
+								<label for="type">User Type (select one):</label>
+								<select class="form-control" id="type">
+									<option value="1">GP</option>
+									<option value="2">Patient</option>
+									<option value="3">Pharmacist</option>
+									<option value="4">Other Staff</option>
 								</select> <br>
 
 							</div>
@@ -199,9 +126,10 @@ $(document).ready(function() {
 								height="142" width="142" alt="profile 1">
 						</div>
 						<div class="col-sm-8 card-body">
-							<h5 class="card-title">User 1</h5>
+							<div>
+							<h5 class="card-title" id="user1">User 1</h5></div>
 
-							<p class="card-text">Lorem Ipsum is simply dummy text of the
+							<p class="card-text" id="email1">Lorem Ipsum is simply dummy text of the
 								printing and typesetting industry. Lorem Ipsum has been the
 								industry's standard dummy text ever since the 1500s, when an
 								unknown printer took a galley of type and scrambled it to make a
@@ -235,9 +163,9 @@ $(document).ready(function() {
 								height="142" width="142" alt="profile 1">
 						</div>
 						<div class="col-sm-8 card-body">
-							<h5 class="card-title">User 2</h5>
+							<h5 class="card-title" id="user2">User 2</h5>
 
-							<p class="card-text">Lorem Ipsum is simply dummy text of the
+							<p class="card-text" id="email2">Lorem Ipsum is simply dummy text of the
 								printing and typesetting industry. Lorem Ipsum has been the
 								industry's standard dummy text ever since the 1500s, when an
 								unknown printer took a galley of type and scrambled it to make a
@@ -269,9 +197,9 @@ $(document).ready(function() {
 								height="142" width="142" alt="profile 1">
 						</div>
 						<div class="col-sm-8 card-body">
-							<h5 class="card-title">User 3</h5>
+							<h5 class="card-title" id="user3">User 3</h5>
 
-							<p class="card-text">Lorem Ipsum is simply dummy text of the
+							<p class="card-text" id="email3">Lorem Ipsum is simply dummy text of the
 								printing and typesetting industry. Lorem Ipsum has been the
 								industry's standard dummy text ever since the 1500s, when an
 								unknown printer took a galley of type and scrambled it to make a
@@ -301,9 +229,9 @@ $(document).ready(function() {
 								height="142" width="142" alt="profile 1">
 						</div>
 						<div class="col-sm-8 card-body">
-							<h5 class="card-title">User 4</h5>
+							<h5 class="card-title" id="user4">User 4</h5>
 
-							<p class="card-text">Lorem Ipsum is simply dummy text of the
+							<p class="card-text" id="email4">Lorem Ipsum is simply dummy text of the
 								printing and typesetting industry. Lorem Ipsum has been the
 								industry's standard dummy text ever since the 1500s, when an
 								unknown printer took a galley of type and scrambled it to make a
@@ -334,9 +262,9 @@ $(document).ready(function() {
 								height="142" width="142" alt="profile 1">
 						</div>
 						<div class="col-sm-8 card-body">
-							<h5 class="card-title">User 5</h5>
+							<h5 class="card-title" id="user5">User 5</h5>
 
-							<p class="card-text">Lorem Ipsum is simply dummy text of the
+							<p class="card-text" id="email5">Lorem Ipsum is simply dummy text of the
 								printing and typesetting industry. Lorem Ipsum has been the
 								industry's standard dummy text ever since the 1500s, when an
 								unknown printer took a galley of type and scrambled it to make a
@@ -361,5 +289,7 @@ $(document).ready(function() {
 			</li>
 		</ul>
 	</div>
+
+	<script src="admin.js"></script>
 </body>
 </html>

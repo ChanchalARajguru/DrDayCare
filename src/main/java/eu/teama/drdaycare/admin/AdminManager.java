@@ -32,16 +32,14 @@ public class AdminManager {
         for (User user : users) {
         	list.add(user);
         }
-        User user = new User();
-    	user.setName("John");
-    	list.add(user);
-        logger.info("Could not find Users");
+//        User user = new User();
+//    	user.setName("John");
+//    	list.add(user);
+//        logger.info("Could not find Users");
         return new UserListResponse (true , list);
     }
     
-    public void addUser() {
-    	User user = new User();
-    	user.setName("John");
+    public void addUser(User user) {
     	databaseController.insertUser(user);
     }
     

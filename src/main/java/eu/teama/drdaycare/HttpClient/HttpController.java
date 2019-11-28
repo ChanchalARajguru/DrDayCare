@@ -8,7 +8,6 @@ import eu.teama.drdaycare.UserTypes.Patient;
 
 import eu.teama.drdaycare.Prescription.jsonData.PrescriptionRequest;
 import eu.teama.drdaycare.Prescription.jsonData.PrescriptionResponse;
-
 import eu.teama.drdaycare.UserTypes.User;
 import eu.teama.drdaycare.additionalDetails.AdditionalDetails;
 import eu.teama.drdaycare.additionalDetails.AdditionalDetailsManager;
@@ -28,8 +27,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class HttpController {
@@ -80,7 +82,7 @@ public class HttpController {
     }
     
     @RequestMapping(value = "/getAllUsers", method = RequestMethod.GET)
-    //@CrossOrigin(origins = crossOrigin)
+    @CrossOrigin(origins = crossOrigin)
     public ResponseEntity<UserListResponse> getUsers() {
     	 logger.info("HTTP client received AllUsers Request");
     	 HttpHeaders responseHeaders = new HttpHeaders();
@@ -92,17 +94,25 @@ public class HttpController {
     }
     
     @RequestMapping(value = "/addUser", method = RequestMethod.POST)
-    //@CrossOrigin(origins = crossOrigin)
-    public void addUser() {
-        logger.info("HTTP client received Add-User Request");
-    	adminManager.addUser();
+    @CrossOrigin(origins = crossOrigin)
+    public ResponseEntity<Map<String, String>> addUser(@RequestBody Map<String, Object> payload) {
+        String id = (String)payload.get("id");
+        String name = (String )payload.get("name");
+        String userRole = (String) payload.get("type");
+
+        String email = (String) payload.get("email");
+        String password = "test";
+        User user = new User(Integer.parseInt(id), name, Integer.parseInt(userRole), email, password);
+    	adminManager.addUser(user);
+    	Map<String, String> map = new HashMap<>();
+    	map.put("result", "success");
+    	return new ResponseEntity<Map<String, String>>(map, HttpStatus.OK);
     }
     
     @RequestMapping(value = "/deleteUser", method = RequestMethod.POST)
-    //@CrossOrigin(origins = crossOrigin)
+    @CrossOrigin(origins = crossOrigin)
     public void deleteUser(@RequestParam(name = "id") String id) {
     	 logger.info("HTTP client received Delete-User Request");
-         
     	adminManager.deleteUser(Integer.parseInt(id));
     }
 
