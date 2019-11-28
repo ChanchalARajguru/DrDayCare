@@ -1,19 +1,17 @@
 package eu.teama.drdaycare.EmergencyId.json;
 
-import eu.teama.drdaycare.UserTypes.Patient;
-
 public class EmergencyIdResponse {
 
-    private final Patient patient;
+    private final Integer patient;
     private final boolean valid;
-    public EmergencyIdResponse(boolean valid , Patient patient) {
+    public EmergencyIdResponse(boolean valid , Integer patient) {
         this.valid = valid;
         this.patient= patient;
     }
     public boolean isValid() {
         return valid;
     }
-    public Patient getEmergencyId() {
+    public Integer getEmergencyId() {
         return patient;
     }
 

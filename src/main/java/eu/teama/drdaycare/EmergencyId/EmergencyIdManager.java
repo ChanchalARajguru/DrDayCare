@@ -23,7 +23,7 @@ public class EmergencyIdManager {
         Iterable<Patient> allPatients = databaseController.getAllEmergencyIds();
         for (Patient patient: allPatients){
             if (emergencyIdRequest.getPatient_id() == (patient.getPatient_id()))
-                return new EmergencyIdResponse(true, patient);
+                return new EmergencyIdResponse(true, patient.getEmergencyId());
         }
 
         logger.info("Could not find Emergency Id");
