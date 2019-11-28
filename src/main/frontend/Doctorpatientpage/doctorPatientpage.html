@@ -1,6 +1,10 @@
 <!DOCTYPE html>
+<head>
 <html lang="en">
 <script src="../template_css/includeTemplate.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="../dataService.js"></script>
+</head>
 <body>
 <div w3-include-html="../drTemplate.html"></div>
 
@@ -39,6 +43,12 @@
     <a href="ViewAditionalDetails.html"> <button class="button">View Additional Details</button></a>
 </div>
 
+<script>
+    response = getPatientDetails(1);
+
+    alert(JSON.stringify(response));
+
+</script>
 
 <script>
     includeHTML();

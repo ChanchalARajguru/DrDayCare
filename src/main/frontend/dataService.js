@@ -40,3 +40,21 @@ function getUsers() {
     });
     return final_response;
 }
+
+function getPatientDetails(id) {
+    $.ajax({
+        type: "GET",
+        url: baseUrl + "/viewPatientdetails/" + id,
+
+        contentType: "application/json; charset=utf-8",
+        async: false,
+        cache: false,
+        success: function (response) {
+            final_response = response;
+        },
+        error: function () {
+            alert("Error on server side!")
+        }
+    });
+    return final_response;
+}
