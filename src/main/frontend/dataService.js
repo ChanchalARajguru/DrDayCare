@@ -15,7 +15,7 @@ function checkLogin(input) {
             final_response = response;
         },
         error: function () {
-            alert("Error on server side!")
+            alert("Error on server side!");
         }
     });
     return final_response;
@@ -42,7 +42,6 @@ function getallPatientdetails(){
 function getUsers() {
 
     $.ajax({
-
         url: baseUrl + "/getAllUsers",
         type: "GET",
         responseType : 'json',
@@ -50,7 +49,6 @@ function getUsers() {
         cache: false,
 
         success: function (response) {
-            //console.log(final_response)
             final_response = response;
             return response;
         },
@@ -75,6 +73,23 @@ function addUser(input) {
         },
         error: function () {
             alert("Error on server side!")
+        }
+    });
+    return final_response;
+}
+
+function getAllPrescriptions() {
+    $.ajax({
+        url: baseUrl + "/pharmacist/getAllPrescriptions",
+        type: "GET",
+        context: document.body,
+        async: false,
+        cache: false,
+        success: function (response) {
+            final_response = response;
+        },
+        error: function () {
+            alert("Error on server side!");
         }
     });
     return final_response;
