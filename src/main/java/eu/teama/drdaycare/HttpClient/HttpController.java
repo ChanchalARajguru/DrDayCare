@@ -85,8 +85,22 @@ public class HttpController {
     	   responseHeaders.set("GetUsers", "Valid");
 
     	return new ResponseEntity<UserListResponse>(adminManager.getAllUsers(), responseHeaders, HttpStatus.OK);
+    	
     }
-    
+
+    @GetMapping("/deactivateUser")
+    public ResponseEntity<Map<String, String>> deactivateUser(@RequestParam String id, @RequestParam String status){
+
+        boolean isActive = Boolean.parseBoolean(status);
+        adminManager.updateUserStatus(Integer.parseInt(id), isActive);
+
+
+        Map<String, String> map = new HashMap<>();
+        map.put("result", "success");
+        map.put("isActive", String.valueOf(isActive));
+        return new ResponseEntity<Map<String, String>>(map, HttpStatus.OK);
+    }
+
     @RequestMapping(value = "/addUser", method = RequestMethod.POST)
     public ResponseEntity<Map<String, String>> addUser(@RequestBody Map<String, Object> payload) {
         String id = (String)payload.get("id");

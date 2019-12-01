@@ -43,4 +43,8 @@ public class AdminManager {
     public void deleteUser(int id) {
     	databaseController.deleteUser(id);
     }
+
+    public void updateUserStatus(int id, boolean status){
+        databaseController.updateUserStatus(id, status);
+    }
 }

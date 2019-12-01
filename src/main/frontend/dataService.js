@@ -58,6 +58,26 @@ function getUsers() {
     });
     return final_response;
 }
+function deactivateUserStatus(id, status) {
+    $.ajax({
+        url: baseUrl + "/deactivateUser?id=" + id+"&status="+status,
+        type: "GET",
+        responseType: 'json',
+        async: false,
+        cache: false,
+
+        success: function (response) {
+            //console.log(final_response)
+            final_response = response;
+            return response;
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            alert("Error on server side!")
+        }
+    });
+
+    return final_response;
+}
 
 function addUser(input) {
     $.ajax({

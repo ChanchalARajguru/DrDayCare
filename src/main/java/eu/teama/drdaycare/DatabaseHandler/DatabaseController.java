@@ -56,6 +56,11 @@ public class DatabaseController {
         return users;
     }
 
+    public boolean updateUserStatus(int id, boolean status){
+        userRepository.updateUserStatus(id, status);
+        return true;
+    }
+
     //Returning an iterable of users based on userRole given. Makes use of custom made query method in userRepository.
     public Iterable<User> getUsersByRole(int userRole) {
         logger.info("Attempting to return all users with user role:" + userRole);

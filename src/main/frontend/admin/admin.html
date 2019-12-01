@@ -1,20 +1,15 @@
 <!doctype html>
 <html lang="en">
+<script src="../template_css/includeTemplate.js"></script>
 <head>
 <!-- Required meta tags -->
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <style>
-.jumbotron {
-	padding-top: 50%;
-	padding-bottom: 20%;
-	background-color: #00F3FF;
-	padding: 5em inherit;
-}
+
 </style>
 <!-- Bootstrap CSS -->
-<script src="../template_css/includeTemplate.js"></script>
 
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -43,7 +38,7 @@
 <title>HSE - Admin</title>
 </head>
 <body>
-
+<div w3-include-html="../drTemplate.html"></div>
 	<div class="container-fluid">
 		<div class="text-center">
 
@@ -133,6 +128,9 @@
 						<div class="col-sm-8 card-body">
 							<div>
 							<h5 class="card-title" id="user1">User 1</h5></div>
+							<p class="card-text" id="userid1"> 1 </p>
+							<p class="card-text" id="userRole1"> ROLE</p>
+							<p class="card-text" id="activeStatus1"> Active </p>
 
 							<p class="card-text" id="email1">Lorem Ipsum is simply dummy text of the
 								printing and typesetting industry. Lorem Ipsum has been the
@@ -149,7 +147,8 @@
 										<td><a href="#" class="btn btn-primary">Edit</a></td>
 									</tr>
 									<tr>
-										<td><a href="#" class="btn btn-primary">Deactivate</a></td>
+										<td><a href="#" class="btn btn-primary" id="active-status-display1" onclick="return deactivateUser(1)">Deactivate</a></td>
+
 									</tr>
 								</tbody>
 							</table>
@@ -169,6 +168,10 @@
 						</div>
 						<div class="col-sm-8 card-body">
 							<h5 class="card-title" id="user2">User 2</h5>
+							<p class="card-text" id="userid2"> 1 </p>
+
+							<p class="card-text" id="userRole2"> ROLE</p>
+							<p class="card-text" id="activeStatus2"> Active </p>
 
 							<p class="card-text" id="email2">Lorem Ipsum is simply dummy text of the
 								printing and typesetting industry. Lorem Ipsum has been the
@@ -184,7 +187,7 @@
 										<td><a href="#" class="btn btn-primary">Edit</a></td>
 									</tr>
 									<tr>
-										<td><a href="#" class="btn btn-primary">Deactivate</a></td>
+										<td><a href="#" class="btn btn-primary" id="active-status-display2" onclick="return deactivateUser(2)">Deactivate</a></td>
 									</tr>
 								</tbody>
 							</table>
@@ -203,6 +206,10 @@
 						</div>
 						<div class="col-sm-8 card-body">
 							<h5 class="card-title" id="user3">User 3</h5>
+							<p class="card-text" id="userid3"> 1 </p>
+
+							<p class="card-text" id="userRole3"> ROLE</p>
+							<p class="card-text" id="activeStatus3"> Active </p>
 
 							<p class="card-text" id="email3">Lorem Ipsum is simply dummy text of the
 								printing and typesetting industry. Lorem Ipsum has been the
@@ -217,7 +224,7 @@
 										<td><a href="#" class="btn btn-primary">Edit</a></td>
 									</tr>
 									<tr>
-										<td><a href="#" class="btn btn-primary">Deactivate</a></td>
+										<td><a href="#" class="btn btn-primary" id="active-status-display3" onclick="return deactivateUser(3)">Deactivate</a></td>
 									</tr>
 								</tbody>
 							</table>
@@ -235,6 +242,10 @@
 						</div>
 						<div class="col-sm-8 card-body">
 							<h5 class="card-title" id="user4">User 4</h5>
+							<p class="card-text" id="userid4"> 1 </p>
+
+							<p class="card-text" id="userRole4"> ROLE</p>
+							<p class="card-text" id="activeStatus4"> Active </p>
 
 							<p class="card-text" id="email4">Lorem Ipsum is simply dummy text of the
 								printing and typesetting industry. Lorem Ipsum has been the
@@ -250,7 +261,7 @@
 										<td><a href="#" class="btn btn-primary">Edit</a></td>
 									</tr>
 									<tr>
-										<td><a href="#" class="btn btn-primary">Deactivate</a></td>
+										<td><a href="#" class="btn btn-primary" id="active-status-display4" onclick="return deactivateUser(4)">Deactivate</a></td>
 									</tr>
 								</tbody>
 							</table>
@@ -268,6 +279,10 @@
 						</div>
 						<div class="col-sm-8 card-body">
 							<h5 class="card-title" id="user5">User 5</h5>
+							<p class="card-text" id="userid5"> 1 </p>
+
+							<p class="card-text" id="userRole5"> ROLE</p>
+							<p class="card-text" id="activeStatus5"> Active </p>
 
 							<p class="card-text" id="email5">Lorem Ipsum is simply dummy text of the
 								printing and typesetting industry. Lorem Ipsum has been the
@@ -283,7 +298,7 @@
 										<td><a href="#" class="btn btn-primary">Edit</a></td>
 									</tr>
 									<tr>
-										<td><a href="#" class="btn btn-primary">Deactivate</a></td>
+										<td><a href="#" class="btn btn-primary" id="active-status-display5" onclick="return deactivateUser(5)">Deactivate</a></td>
 									</tr>
 								</tbody>
 							</table>
@@ -296,5 +311,6 @@
 	</div>
 
 	<script src="admin.js"></script>
+
 </body>
 </html>
