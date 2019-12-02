@@ -9,7 +9,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.RequestBody;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 @Component
@@ -115,4 +118,29 @@ public class DatabaseController {
         logger.info("Returning additional details");
         return additionalDetails;
     }
-}
+    public void insertPatient(Patient patient){
+        logger.info("Attempting to add patient " + patient.getName() + " to database");
+        patientRepository.save(patient);
+        logger.info("" + patient.getName() + " added to database");
+    }
+    public void editpatient(@RequestBody Patient patient, int userid){
+        Optional <Patient> epatient =  patientRepository.findById(userid);
+        System.out.println("epatient"+epatient.get());
+        System.out.println("in database : "+epatient.get());
+        int id = epatient.get().getUserId();
+        int eid = epatient.get().getEmergencyId();
+        patient.setEmergencyId(eid);
+        patient.setUserId(userid);
+        System.out.println("the id: " +userid);
+        System.out.println("new entry : "+ patient);
+        patientRepository.save(patient);
+    }
+    public void deletepatient(int userid){
+        System.out.println("deleteById "+ userid);
+        patientRepository.deleteById(userid);
+    }
+
+    }
+
+
+

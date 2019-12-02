@@ -31,6 +31,4 @@ public class PrescriptionManager {
         logger.info("Could not find Prescription");
         return new PrescriptionResponse (false , null);
     }
-
-
 }

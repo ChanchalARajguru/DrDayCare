@@ -57,3 +57,87 @@ function getUsers() {
     });
     return final_response;
 }
+
+function addPatient(input) {
+
+    $.ajax({
+        type:"POST",
+        url: baseUrl + "/doctor/addPatient",
+        data: JSON.stringify(input),
+        dataType: "json",
+        contentType: "application/json; charset=utf-8",
+        async: false,
+        cache: false,
+        success: function (response) {
+            final_response = response;
+            // alert("Success on server side!")
+        },
+        error: function (jqXHR,  textStatus,  errorThrown) {
+            // alert("Error on server side!"+ textStatus + "=="+errorThrown +"=="+jqXHR)
+        }
+    });
+    return final_response;
+}
+
+function getPatients() {
+    $.ajax({
+        type:"GET",
+        url: baseUrl + "/doctor/getAllPatients",
+        /*data: JSON.stringify(input),*/
+        dataType: "json",
+        contentType: "application/json; charset=utf-8",
+        async: false,
+        cache: false,
+        success: function (response) {
+            final_response = response;
+            // alert("Success on server side!")
+        },
+        error: function (jqXHR,  textStatus,  errorThrown) {
+            // alert("Error on server side!"+ textStatus + "=="+errorThrown +"=="+jqXHR)
+        }
+    });
+      return final_response;
+}
+
+function editPatientDS(input,uri) {
+        $.ajax({
+        type:"POST",
+//        url: baseUrl + "/doctor/edit",
+        url: baseUrl + uri,
+        data: JSON.stringify(input),
+        dataType: "json",
+        contentType: "application/json; charset=utf-8",
+        async: false,
+        cache: false,
+        success: function (response) {
+            final_response = response;
+            // alert("Success on server side!")
+        },
+        error: function (jqXHR,  textStatus,  errorThrown) {
+            // alert("Error on server side!"+ textStatus + "=="+errorThrown +"=="+jqXHR)
+        }
+    });
+        return final_response;
+}
+function deletePatientDS(uri) {
+    console.log("deletePatientDS");
+    $.ajax({
+        type:"POST",
+//        url: baseUrl + "/doctor/edit",
+        url: baseUrl + uri,
+//        data: JSON.stringify(input),
+  //      dataType: "json",
+        contentType: "application/json; charset=utf-8",
+        async: false,
+        cache: false,
+        success: function (response) {
+            final_response = response;
+            // alert("Success on server side!")
+        },
+        error: function (jqXHR,  textStatus,  errorThrown) {
+            // alert("Error on server side!"+ textStatus + "=="+errorThrown +"=="+jqXHR)
+        }
+    });
+    location.reload();
+    return final_response;
+}

@@ -1,65 +1,110 @@
 <!DOCTYPE html>
 <html lang="en">
-    <script src="../template_css/includeTemplate.js"></script>
+    <head>
+        <script src="../template_css/includeTemplate.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+        <script src="../dataService.js"></script>
+        <link rel="stylesheet" href="docdash.css" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css" />
+    </head>
     <body>
-        <div w3-include-html="../drTemplate.html"></div>
-        <script>
-            includeHTML();
-        </script>
-    <link rel="stylesheet" href="docdash.css" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-    <body >
+    <div w3-include-html="../drTemplate.html"></div>
     <div class="container-fluid">
-        <div class="row text-center center-block p-format">
-            <div class="col-sm-2 bggreen mar-left">
-                <p class="num">10</p>
-                <p>New Patients</p>
+            <div class="row text-center center-block p-format">
+                <div class="col-sm-2 bggreen mar-left">
+                    <p class="num">10</p>
+                    <p>New Patients</p>
+                </div>
+                <div class="col-sm-2 bgblue col-sm-offset-1">
+                    <p class="num">30</p>
+                    <p>Total Patients</p>
+                </div>
+                <div class="col-sm-2 bgyellow col-md-offset-1">
+                    <p class="num">08</p>
+                    <p>Other Medical Staff</p>
+                </div>
+                <div class="col-sm-2 bgorange col-md-offset-1">
+                    <p class="num">46</p>
+                    <p>Prescriptions Alloted</p>
+                </div>
             </div>
-            <div class="col-sm-2 bgblue col-sm-offset-1">
-                <p class="num">30</p>
-                <p>Total Patients</p>
+            <!--############################-->
+            <!--###### Add Patients ###########-->
+            <!--############################-->
+            <button type="button" class="row col-md-offset-9 btn btn-success mr-top " data-toggle="modal" data-target="#myModal">Add Patients <span class="glyphicon glyphicon-plus"></span></button>
+            <!--<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>-->
+            <!-- Modal -->
+            <div class="modal fade" id="myModal" role="dialog">
+                <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Add Patient</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form action="" method="POST">
+                                <div class="form-group">
+                                    <label for="name">Name:</label>
+                                    <input type="input" class="form-control" id="name" />
+                                </div>
+<!--
+                                <div class="form-group">
+                                    <label for="emergencyid">Emergency Id:</label>
+                                    <input type="input" class="form-control" id="emergencyid" />
+                                </div>
+-->
+                                <div class="form-group">
+                                    <label for="age">Age:</label>
+                                    <input type="input" class="form-control" id="age" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="address">Address:</label>
+                                    <textarea class="form-control" rows="5" id="address"></textarea>
+                                </div>
+                                <button type="submit" id="patientSubmit" class="btn btn-success">Submit</button>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="col-sm-2 bgyellow col-md-offset-1">
-                <p class="num">08</p>
-                <p>Other Medical Staff</p>
-            </div>
-            <div class="col-sm-2 bgorange col-md-offset-1">
-                <p class="num">46</p>
-                <p>Prescriptions Alloted</p>
-            </div>
-        </div>
-        <button type="button" class="row col-md-offset-9 btn btn-success mr-top " data-toggle="modal" data-target="#myModal">Add Patients <span class="glyphicon glyphicon-plus"></span></button>
-        <!--<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>-->
+        <!--############################-->
+        <!--###### Edit Patients ###########-->
+        <!--############################-->
         <!-- Modal -->
-        <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal fade" id="editModal" role="dialog">
             <div class="modal-dialog">
                 <!-- Modal content-->
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Add/Edit Patient</h4>
+                        <h4 class="modal-title">Edit Patient</h4>
                     </div>
                     <div class="modal-body">
-                        <form action="/action_page.php">
+                        <form action="" method="POST">
                             <div class="form-group">
                                 <label for="name">Name:</label>
-                                <input type="input" class="form-control" id="name" />
+                                <input type="input" class="form-control" id="editname" />
                             </div>
-                            <div class="form-group">
-                                <label for="emergencyid">Emergency Id:</label>
-                                <input type="input" class="form-control" id="emergencyid" />
-                            </div>
+                            <!--
+                                                            <div class="form-group">
+                                                                <label for="emergencyid">Emergency Id:</label>
+                                                                <input type="input" class="form-control" id="emergencyid" />
+                                                            </div>
+                            -->
                             <div class="form-group">
                                 <label for="age">Age:</label>
-                                <input type="input" class="form-control" id="age" />
+                                <input type="input" class="form-control" id="editage" />
                             </div>
                             <div class="form-group">
                                 <label for="address">Address:</label>
-                                <textarea class="form-control" rows="5" id="address"></textarea>
+                                <textarea class="form-control" rows="5" id="editaddress"></textarea>
                             </div>
-                            <button type="submit" class="btn btn-success">Submit</button>
+                            <button type="submit" id="editSubmit" class="btn btn-success">Submit</button>
                         </form>
                     </div>
                     <div class="modal-footer">
@@ -68,52 +113,44 @@
                 </div>
             </div>
         </div>
-        <div class="mr-top">
-            <ul class="list-group">
-                <li class="list-group-item">
-                    <p class="col-md-offset-11"><img src="" data-toggle="modal" data-target="#myModal" class="glyphicon glyphicon-pencil" /><img src="" data-toggle="modal" data-target="#myDelete" class="glyphicon glyphicon-trash" /></p>
-                    <h4><b>John Kennedy</b></h4>
-                    <p>Age: 25 years</p>
-                    <p>Emergency Id:SJAK732DHJS88</p>
-                </li>
-                <li class="list-group-item">
-                    <p class="col-md-offset-11"><img src="" data-toggle="modal" data-target="#myModal" class="glyphicon glyphicon-pencil" /><img src="" data-toggle="modal" data-target="#myDelete" class="glyphicon glyphicon-trash" /></p>
-                    <h4><b>Anita Donny</b></h4>
-                    <p>Age: 55 years</p>
-                    <p>Emergency Id:BSC8232HH128</p>
-                </li>
-       <!--         <li class="list-group-item">
-                    <h4><b>Saira Kenny</b></h4>
-                    <p>Age: 20 years</p>
-                    <p>Emergency Id:VNDVN3892NNN1</p>
-                </li>-->
-            </ul>
-        </div>
-        <div class="col-md-offset-5 ">
-            <ul class="pagination ">
-                <li><a href="#">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">5</a></li>
-            </ul>
-        </div>
-        <!-- Delete Modal -->
-        <div class="modal fade" id="myDelete" role="dialog">
-            <div class="modal-dialog">
-                <!-- Modal content-->
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Delete Patient</h4>
+
+            <!--############################-->
+            <!--###### List Patients ###########-->
+            <!--############################-->
+            <div class="mr-top">
+                <ul class="list-group">
+                </ul>
+            </div>
+            <div class="col-md-offset-5 ">
+                <ul class="pagination ">
+                    <li><a href="#">1</a></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">4</a></li>
+                    <li><a href="#">5</a></li>
+                </ul>
+            </div>
+            <!-- Delete Modal -->
+            <div class="modal fade" id="myDelete" role="dialog">
+                <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Delete Patient</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p>Are you sure you want to delete patient?</p>
+                            <button type="submit" id="deletePatientbtn" class="btn btn-danger">Confirm</button>
+                            <!--<button type="submit" class="btn btn-primary">Cancel</button>-->
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                        </div>
                     </div>
-                    <div class="modal-body">
-                        <p>Are you sure you want to delete patient xxxxxxx?</p>
-                        <button type="submit" class="btn btn-danger">Confirm</button>
-                        <button type="submit" class="btn btn-primary">Cancel</button>
-                    </div>
-    <script>
-        includeHTML();
-    </script>
+                </div>
+            </div>
+        <script src="patient.js"></script>
+        <script>
+            includeHTML();
+        </script>
     </body>
 </html>

@@ -3,7 +3,7 @@ package eu.teama.drdaycare.IntegrationTests;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import eu.teama.drdaycare.Login.jsonData.LoginRequest;
 import eu.teama.drdaycare.additionalDetails.AdditionalDetails;
-import org.junit.Test;
+import org.testng.annotations.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;

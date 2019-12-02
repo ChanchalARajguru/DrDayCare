@@ -11,7 +11,6 @@ public class UserListResponse {
     public UserListResponse(boolean valid , ArrayList<User> list) {
         this.valid = valid;
         this.list = list;
-
     }
     public boolean isValid() {
         return valid;

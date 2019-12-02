@@ -3,6 +3,8 @@ package eu.teama.drdaycare.HttpClient;
 import eu.teama.drdaycare.Login.jsonData.LoginRequest;
 import eu.teama.drdaycare.Login.jsonData.LoginResponse;
 import eu.teama.drdaycare.Login.LoginManager;
+import eu.teama.drdaycare.Patient.PatientListResponse;
+import eu.teama.drdaycare.Patient.PatientManager;
 import eu.teama.drdaycare.medicalstaff.MedicalStaffManager;
 import eu.teama.drdaycare.UserTypes.Patient;
 
@@ -25,6 +27,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -54,6 +57,8 @@ public class HttpController {
     @Autowired
     private AdditionalDetailsManager additionalDetailsManager;
 
+    @Autowired
+    private PatientManager patientManager;
 
     //Takes a POST request over at address $System_IP/login (ie http://localhost:8080/login if run on local system) with a JSON login request in the body
     //Method takes in a loginRequest, gives information to LoginManager and then returns the loginResponse it receives from the manager.
@@ -88,7 +93,6 @@ public class HttpController {
     	   responseHeaders.set("GetUsers", "Valid");
 
     	return new ResponseEntity<UserListResponse>(adminManager.getAllUsers(), responseHeaders, HttpStatus.OK);
-    	
     }
     
     @RequestMapping(value = "/addUser", method = RequestMethod.POST)
@@ -122,6 +126,34 @@ public class HttpController {
 
         return additionalDetailsList;
     }
+
+    @RequestMapping(value = "doctor/addPatient", method = RequestMethod.POST, consumes = {MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_FORM_URLENCODED_VALUE})
+    @CrossOrigin(origins = crossOrigin)
+    public ResponseEntity addPatient(@RequestBody Patient patient) {
+        System.out.println(patient.toString());
+        patientManager.addPatient(patient);
+        return new ResponseEntity<>("Created", HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "doctor/getAllPatients", method = RequestMethod.GET)
+    @CrossOrigin(origins = crossOrigin)
+    public ResponseEntity<PatientListResponse> getPatients() {
+        logger.info("HTTP client received AllPatients Request");
+        HttpHeaders responseHeaders = new HttpHeaders();
+        responseHeaders.set("GetPatient", "Valid");
+        return new ResponseEntity<PatientListResponse>(patientManager.getAllPatients(), responseHeaders, HttpStatus.OK);
+    }
+    @RequestMapping(value = "/doctor/edit", method = RequestMethod.POST, consumes = {MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_FORM_URLENCODED_VALUE})
+    @CrossOrigin(origins = crossOrigin)
+    @ResponseBody public ResponseEntity editPatient(@RequestBody Patient patient,@RequestParam String userid) {
+        patientManager.editPatient(patient,userid);
+        return new ResponseEntity<>("Updated", HttpStatus.OK);
+    }
+    @RequestMapping(value = "/doctor/delete", method = RequestMethod.POST)
+    @CrossOrigin(origins = crossOrigin)
+    @ResponseBody public ResponseEntity deletePatient(@RequestParam String userid) {
+        patientManager.deletePatient(userid);
+        return new ResponseEntity<>("Deleted", HttpStatus.OK);
+    }
+
 }
-
-
