@@ -1,23 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!--    <style>-->
-<!--        body{-->
-<!--            background-color:red;-->
-<!--        }-->
-<!--    </style>-->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="PharmacistDashboard.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="../template_css/includeTemplate.js"></script>
+    <script src="../dataService.js"></script>
+    <script src = SearchPatient.js></script>
+
+    <style>
+        .jumbotron{
+            margin:2% 10%;
+            border-radius: 25px;
+            border: solid;
+            border: 10px;
+            border-color: black;
+        }
+
+        .column {
+            float: left;
+            width: 50%;
+        }
+
+        /* Clear floats after the columns */
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+
+    </style>
+
 </head>
-<script src="../template_css/includeTemplate.js"></script>
+
 <body style="background-color: palegoldenrod">
 <div w3-include-html="../drTemplate.html"></div>
 <div>
     <div id="mySidenav" class="sidenav">
         <a href="PharmacistDashboard.html" id="Dashboard">Home</a>
         <a href="SearchPatient.html" id="Search">PatientSearch</a>
-        <a href="AddVideos" id="Add">Add Videos</a>
-        <a href="Contact" id="contact">Contact</a>
+        <a href="AddVideos.html" id="Add">Add Videos</a>
+        <a href="Contact.html" id="contact">Contact</a>
     </div>
 
     <div style="margin-left:80px; text-align: center">
@@ -26,7 +50,18 @@
             <input type="text" id="PatientID" style="width:40%">
         </div>
 
+
+
+        <div id="outer">
+            <div id="mydiv" data-myval="10"></div>
+        </div>
+
+        <script>
+            populatePage();
+        </script>
     </div>
+
+
 
 </div>
 
@@ -55,19 +90,6 @@
 
             alert(JSON.stringify(response));
 
-            if (response.valid === true){
-                var patient = response.patient;
-                switch (patient.PatientId) {
-                    case 1: window.location.replace("dummy_pages/dummy1.html"); break;
-                    case 2: window.location.replace("dummy_pages/dummy2.html"); break;
-                    case 3: window.location.replace("dummy_pages/dummy3.html"); break;
-                    case 4: window.location.replace("dummy_pages/dummy4.html"); break;
-                    case 5: window.location.replace("dummy_pages/dummy5.html"); break;
-                }
-            }
-            else{
-                bootstrap_alert.warning("Invalid Id was given.");
-            }
         }
 
     }
