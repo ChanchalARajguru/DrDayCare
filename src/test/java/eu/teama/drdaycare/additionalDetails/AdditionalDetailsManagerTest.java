@@ -9,6 +9,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
+import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.ArrayList;
@@ -44,7 +45,7 @@ class AdditionalDetailsManagerTest {
         List<AdditionalDetails> expectedAdditionalDetailsList = new ArrayList<>();
         for (int i =1; i <= 5; i++) {
             String comment = "This is comment number " + i;
-            expectedAdditionalDetailsList.add(new AdditionalDetails(1, patientId, creatorId, comment));
+            expectedAdditionalDetailsList.add(new AdditionalDetails(i, patientId, creatorId, comment));
         }
 
         Mockito.when(databaseController.getAdditionalDetailsForPatient(patientId)).thenReturn(mockedAdditionalDetails);
@@ -67,5 +68,26 @@ class AdditionalDetailsManagerTest {
         List<AdditionalDetails> additionalDetailsList = additionalDetailsManager.getAdditionalDetailsForPatient(stringPatientId);
 
         assertThat(additionalDetailsList).isNull();
-}
+    }
+
+    @Test
+    void addValidAdditionalDetail(){
+        AdditionalDetails additionalDetail = new AdditionalDetails(1, 2, 3, "This is our comment");
+
+        Mockito.doNothing().when(databaseController).addDetail(additionalDetail);
+    }
+
+    @Test
+    void deletePresentDetail(){
+        AdditionalDetails additionalDetail = new AdditionalDetails(1, 2, 3, "This is our comment");
+
+        Mockito.doNothing().when(databaseController).deleteDetail(additionalDetail);
+    }
+
+    @Test
+    void editValidDetail(){
+        AdditionalDetails additionalDetail = new AdditionalDetails(1, 2, 3, "This is our comment");
+
+        Mockito.doNothing().when(databaseController).editDetail(additionalDetail);
+    }
 }

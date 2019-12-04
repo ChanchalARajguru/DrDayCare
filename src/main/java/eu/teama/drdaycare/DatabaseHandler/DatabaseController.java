@@ -145,7 +145,27 @@ public class DatabaseController {
         patientRepository.deleteById(userid);
     }
 
+    public Optional<AdditionalDetails> getDetail(int detailId) {
+        logger.info("Getting detail with Id: " + detailId);
+        Optional<AdditionalDetails> details = additionalDetailsRepository.findById(detailId);
+        return details;
     }
+
+    public void editDetail(AdditionalDetails detail) {
+        logger.info("Editing detail with Id: " + detail.getId());
+        additionalDetailsRepository.save(detail);
+    }
+
+    public void deleteDetail(AdditionalDetails detail) {
+        logger.info("Deleting detail with Id: " + detail.getId());
+        additionalDetailsRepository.deleteById(detail.getId());
+    }
+
+    public void addDetail(AdditionalDetails detail) {
+        logger.info("Adding detail with Id: " + detail.getId());
+        additionalDetailsRepository.save(detail);
+    }
+}
 
 
 

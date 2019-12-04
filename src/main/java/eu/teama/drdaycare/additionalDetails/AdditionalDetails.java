@@ -19,6 +19,12 @@ public class AdditionalDetails {
 
     public AdditionalDetails(){   }
 
+    public AdditionalDetails(int creatorId, int patientId, String details){
+        this.creatorId = creatorId;
+        this.patientId = patientId;
+        this.details = details;
+    }
+
     public AdditionalDetails(int id, int creatorId, int patientId, String details){
         this.id = id;
         this.creatorId = creatorId;
@@ -42,6 +48,16 @@ public class AdditionalDetails {
         return details;
     }
 
+    public void setCreatorId(int creatorId){
+        this.creatorId = creatorId;
+    }
 
+    public void setPatientId(int patientId){
+        this.patientId = patientId;
+    }
+
+    public void setCommentText(String commentText){
+        this.details = commentText;
+    }
 
 }

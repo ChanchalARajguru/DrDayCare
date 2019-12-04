@@ -7,6 +7,7 @@ import eu.teama.drdaycare.Patient.PatientListResponse;
 import eu.teama.drdaycare.Patient.PatientManager;
 import eu.teama.drdaycare.Prescription.PrescriptionDetail;
 import eu.teama.drdaycare.UserTypes.Prescription;
+import eu.teama.drdaycare.additionalDetails.AdditionalDetailsRequest;
 import eu.teama.drdaycare.medicalstaff.MedicalStaffManager;
 import eu.teama.drdaycare.UserTypes.Patient;
 
@@ -30,7 +31,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
@@ -141,17 +141,33 @@ public class HttpController {
         commentManager.addComment(commentRequest);
     }
 
-    @RequestMapping(value = "/doctor/getPatientAdditionalDetails/{patientId}", method = RequestMethod.GET)
+    @RequestMapping(value = "/doctor/patientAdditionalDetails/{patientId}", method = RequestMethod.GET)
     public List<AdditionalDetails> getPatientDetails(@PathVariable ("patientId") final String patientId) {
         logger.info("HTTP client received request to get additional details for patient with id: " + patientId);
         List<AdditionalDetails> additionalDetailsList = additionalDetailsManager.getAdditionalDetailsForPatient(patientId);
-        logger.info("" + additionalDetailsList.size());
 
         return additionalDetailsList;
     }
 
+    @RequestMapping(value = "/doctor/patientAdditionalDetails/{patientId}", method = RequestMethod.POST)
+    public void addPatientDetails(@RequestBody AdditionalDetailsRequest additionalDetailsRequest) {
+        logger.info("HTTP client received request to create a new additional details");
+        additionalDetailsManager.createAdditionalDetails(additionalDetailsRequest);
+    }
+
+    @RequestMapping(value = "/doctor/patientAdditionalDetails/{patientId}/{detailId}", method = RequestMethod.DELETE)
+    public void deletePatientDetail(@PathVariable ("patientId") int patientId, @PathVariable ("detailId") int detailId) {
+        logger.info("HTTP client received request to get delete additional detail with id: " + detailId + " from patient with id: " + patientId);
+        additionalDetailsManager.deleteDetail(detailId);
+    }
+
+    @RequestMapping(value = "/doctor/patientAdditionalDetails/{patientId}/{detailId}", method = RequestMethod.POST)
+    public void editPatientDetail(@PathVariable ("patientId") int patientId, @PathVariable ("detailId") int detailId, @RequestBody String commentText) {
+        logger.info("HTTP client received request to get edit additional detail with id: " + detailId + " from patient with id: " + patientId);
+        additionalDetailsManager.editDetail(detailId, commentText);
+    }
+
     @RequestMapping(value = "doctor/addPatient", method = RequestMethod.POST, consumes = {MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_FORM_URLENCODED_VALUE})
-//    @CrossOrigin(origins = crossOrigin)
     public ResponseEntity addPatient(@RequestBody Patient patient) {
         System.out.println(patient.toString());
         patientManager.addPatient(patient);
@@ -173,7 +189,6 @@ public class HttpController {
         return new ResponseEntity<>("Updated", HttpStatus.OK);
     }
     @RequestMapping(value = "/doctor/delete", method = RequestMethod.POST)
-//    @CrossOrigin(origins = crossOrigin)
     @ResponseBody public ResponseEntity deletePatient(@RequestParam String userid) {
         patientManager.deletePatient(userid);
         return new ResponseEntity<>("Deleted", HttpStatus.OK);

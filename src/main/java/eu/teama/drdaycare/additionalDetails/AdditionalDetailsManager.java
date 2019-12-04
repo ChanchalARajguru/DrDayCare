@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AdditionalDetailsManager {
@@ -37,6 +38,41 @@ public class AdditionalDetailsManager {
 
         logger.info("No additional details returned");
         return null;
+    }
+
+    public void deleteDetail(int detailId) {
+        logger.info("Attempting to delete detail with id: " + detailId);
+        Optional<AdditionalDetails> optionalDetail = databaseController.getDetail(detailId);
+        if (optionalDetail.isPresent()) {
+            AdditionalDetails detail = optionalDetail.get();
+            logger.info("Detail is present");
+            databaseController.deleteDetail(detail);
+        }
+        logger.info("Detail is not present");
+    }
+
+    public void editDetail(int detailId, String commentText) {
+        logger.info("Attempting to edit detail with id: " + detailId);
+        Optional<AdditionalDetails> optionalDetail = databaseController.getDetail(detailId);
+
+        if (optionalDetail.isPresent()) {
+            AdditionalDetails detail = optionalDetail.get();
+            logger.info("Detail is present");
+            detail.setCommentText(commentText);
+            databaseController.editDetail(detail);
+        }
+        logger.info("Detail is not present");
+    }
+
+    public void createAdditionalDetails(AdditionalDetailsRequest additionalDetailsRequest) {
+        logger.info("Attempting to add new detail");
+
+        AdditionalDetails details = new AdditionalDetails();
+        details.setCreatorId(additionalDetailsRequest.getCreatorId());
+        details.setPatientId(additionalDetailsRequest.getPatientId());
+        details.setCommentText(additionalDetailsRequest.getDetails());
+
+        databaseController.addDetail(details);
     }
 
     private List<AdditionalDetails> turnToList(Iterable <AdditionalDetails> iterable){
