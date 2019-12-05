@@ -72,9 +72,12 @@ class AdditionalDetailsManagerTest {
 
     @Test
     void addValidAdditionalDetail(){
+        AdditionalDetailsRequest additionalDetailRequest = new AdditionalDetailsRequest( 2, 3, "This is our comment");
         AdditionalDetails additionalDetail = new AdditionalDetails(1, 2, 3, "This is our comment");
 
         Mockito.doNothing().when(databaseController).addDetail(additionalDetail);
+
+        additionalDetailsManager.createAdditionalDetails(additionalDetailRequest);
     }
 
     @Test

@@ -35,4 +35,21 @@ public class Comment {
         this.comment_text = comment_text;
         this.visible_to_patient = visible_to_patient;
     }
+
+    public void setCommentText(String comment_text){
+        this.comment_text = comment_text;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getComment_text(){
+        return comment_text;
+    }
+
+    public boolean isVisible_to_patient(){
+        return visible_to_patient;
+    }
+
 }

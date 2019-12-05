@@ -76,7 +76,7 @@ public class AdditionalDetailsTest {
     @Test
     @Sql(scripts = {"classpath:dataForTests/additionalDetailsCleanup-h2.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     @Sql(scripts = {"classpath:dataForTests/additionalDetailsCleanup-h2.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
-    public void addValidAdditionalDetail() throws Exception {
+    public void testAddValidAdditionalDetail() throws Exception {
         int patientId = 1; int creatorId = 2; String commentText = "This is our detail";
         AdditionalDetails additionalDetail = new AdditionalDetails(1,creatorId,patientId, commentText);
 
@@ -118,7 +118,7 @@ public class AdditionalDetailsTest {
     @Test
     @Sql(scripts = {"classpath:dataForTests/additionalDetails-h2.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
     @Sql(scripts = {"classpath:dataForTests/additionalDetailsCleanup-h2.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
-    public void deletePresentDetail() throws Exception {
+    public void testDeletePresentDetail() throws Exception {
         //Setup Variables
         int patientId = 1; int creatorId = 2; String commentText = "This is our detail"; int detailId = 1;
         AdditionalDetails additionalDetail = new AdditionalDetails(detailId,creatorId,patientId, commentText);
@@ -155,7 +155,7 @@ public class AdditionalDetailsTest {
     @Test
     @Sql(scripts = {"classpath:dataForTests/additionalDetails-h2.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
     @Sql(scripts = {"classpath:dataForTests/additionalDetailsCleanup-h2.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
-    public void editValidDetail() throws Exception {
+    public void testEditValidDetail() throws Exception {
         //Setup Variables
         int patientId = 1; int creatorId = 2; String originalCommentText = "This is our detail"; String newCommentText= "This is the new detail"; int detailId = 1;
         AdditionalDetails additionalDetail = new AdditionalDetails(detailId,creatorId,patientId, originalCommentText);

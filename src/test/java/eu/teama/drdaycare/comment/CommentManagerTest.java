@@ -30,11 +30,30 @@ public class CommentManagerTest {
 
     @Test
     public void checkAddCommentWithValidComment()throws SQLException{
-        CommentRequest commentRequest = new CommentRequest(1,2, "This is a comment", true);
-        Comment commentInDatabaseHandler = new Comment(1,2, "This is a comment", true);
+        int patientId = 1,creatorId = 2;
+        CommentRequest commentRequest = new CommentRequest(patientId,creatorId, "This is a comment", true);
+        Comment commentInDatabaseHandler = new Comment(patientId,creatorId, "This is a comment", true);
 
         Mockito.doNothing().when(databaseController).addComment(commentInDatabaseHandler);
 
         commentManager.addComment(commentRequest);
+    }
+
+    @Test
+    void deleteComment(){
+        Comment comment = new Comment(1,2, 3, "This is our comment", true);
+
+        Mockito.doNothing().when(databaseController).deleteComment(comment);
+
+        commentManager.deleteComment("" + comment.getId());
+    }
+
+    @Test
+    void editComment(){
+        Comment comment = new Comment(1,2, 3, "This is our new comment", true);
+
+        Mockito.doNothing().when(databaseController).editComment(comment);
+
+        commentManager.editComment("" + comment.getId(), "This is our new comment");
     }
 }

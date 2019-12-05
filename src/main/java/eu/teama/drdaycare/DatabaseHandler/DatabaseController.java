@@ -165,6 +165,29 @@ public class DatabaseController {
         logger.info("Adding detail with Id: " + detail.getId());
         additionalDetailsRepository.save(detail);
     }
+
+    public Iterable<Comment> getCommentsForPatient(int patientId) {
+        logger.info("Attempting to return comments to patient with PatientID:" + patientId);
+        Iterable<Comment> comments= commentRepository.commentsForPatient(patientId);
+        logger.info("Returning comments");
+        return comments;
+    }
+
+    public void editComment(Comment comment) {
+        logger.info("Editing comment with Id: " + comment.getId());
+        commentRepository.save(comment);
+    }
+
+    public Optional<Comment> getComment(int commentId) {
+        logger.info("Getting detail with Id: " + commentId);
+        Optional<Comment> comment = commentRepository.findById(commentId);
+        return comment;
+    }
+
+    public void deleteComment(Comment comment) {
+        logger.info("Deleting comment with Id: " + comment.getId());
+        commentRepository.deleteById(comment.getId());
+    }
 }
 
 

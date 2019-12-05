@@ -8,6 +8,7 @@ import eu.teama.drdaycare.Patient.PatientManager;
 import eu.teama.drdaycare.Prescription.PrescriptionDetail;
 import eu.teama.drdaycare.UserTypes.Prescription;
 import eu.teama.drdaycare.additionalDetails.AdditionalDetailsRequest;
+import eu.teama.drdaycare.comment.Comment;
 import eu.teama.drdaycare.medicalstaff.MedicalStaffManager;
 import eu.teama.drdaycare.UserTypes.Patient;
 
@@ -135,10 +136,28 @@ public class HttpController {
         return prescriptionDetailsList;
     }
 
-    @RequestMapping(value = "/pharmacist/addComment", method = RequestMethod.POST)
+    @RequestMapping(value = "/pharmacist/comment", method = RequestMethod.POST)
     public void addComment(@RequestBody CommentRequest commentRequest) {
         logger.info("HTTP client received request to add comment");
         commentManager.addComment(commentRequest);
+    }
+
+    @RequestMapping(value = "/pharmacist/comment/{patientId}", method = RequestMethod.GET)
+    public List<Comment> getAllCommentsForPatient(@PathVariable String patientId) {
+        logger.info("HTTP client received request to get all comments from user " + patientId);
+        return commentManager.getAllCommentsForPatientId(patientId);
+    }
+
+    @RequestMapping(value = "/pharmacist/comment/{patientId}/{commentId}", method = RequestMethod.POST)
+    public void editComment(@PathVariable String patientId, @PathVariable String commentId, @RequestBody String commentText) {
+        logger.info("HTTP client received request to edit comment from user " + patientId);
+        commentManager.editComment(commentId, commentText);
+    }
+
+    @RequestMapping(value = "/pharmacist/comment/{patientId}/{commentId}", method = RequestMethod.DELETE)
+    public void deleteComment(@PathVariable String patientId, @PathVariable String commentId) {
+        logger.info("HTTP client received request to delete comment from user " + patientId);
+        commentManager.deleteComment(commentId);
     }
 
     @RequestMapping(value = "/doctor/patientAdditionalDetails/{patientId}", method = RequestMethod.GET)
@@ -175,7 +194,6 @@ public class HttpController {
     }
 
     @RequestMapping(value = "doctor/getAllPatients", method = RequestMethod.GET)
-//    @CrossOrigin(origins = crossOrigin)
     public ResponseEntity<PatientListResponse> getPatients() {
         logger.info("HTTP client received AllPatients Request");
         HttpHeaders responseHeaders = new HttpHeaders();
@@ -183,7 +201,6 @@ public class HttpController {
         return new ResponseEntity<PatientListResponse>(patientManager.getAllPatients(), responseHeaders, HttpStatus.OK);
     }
     @RequestMapping(value = "/doctor/edit", method = RequestMethod.POST, consumes = {MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_FORM_URLENCODED_VALUE})
-//    @CrossOrigin(origins = crossOrigin)
     @ResponseBody public ResponseEntity editPatient(@RequestBody Patient patient,@RequestParam String userid) {
         patientManager.editPatient(patient,userid);
         return new ResponseEntity<>("Updated", HttpStatus.OK);
@@ -193,5 +210,4 @@ public class HttpController {
         patientManager.deletePatient(userid);
         return new ResponseEntity<>("Deleted", HttpStatus.OK);
     }
-
 }
