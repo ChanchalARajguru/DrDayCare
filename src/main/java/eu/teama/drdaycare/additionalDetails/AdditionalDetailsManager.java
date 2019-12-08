@@ -32,11 +32,8 @@ public class AdditionalDetailsManager {
             logger.info("Returning Additional details for " + patientId);
             logger.info("" + additionalDetailsList.size());
             logger.info(additionalDetailsList.get(0).getDetailsText());
-            return additionalDetailsList;
         }
-
-        logger.info("No additional details returned");
-        return null;
+        return additionalDetailsList;
     }
 
     public void deleteDetail(int detailId) {

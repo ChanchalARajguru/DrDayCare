@@ -12,6 +12,7 @@ public class MedicalStaffManager {
 
     @Autowired
     private final DatabaseController databaseController;
+
     public MedicalStaffManager( final DatabaseController databaseController){this.databaseController =databaseController;}
     //Look at  Login Manager, create similar to method in there
     public ArrayList<Patient> getPatientList() {

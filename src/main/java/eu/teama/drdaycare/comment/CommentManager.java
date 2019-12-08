@@ -1,7 +1,6 @@
 package eu.teama.drdaycare.comment;
 
 import eu.teama.drdaycare.DatabaseHandler.DatabaseController;
-import eu.teama.drdaycare.additionalDetails.AdditionalDetails;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +31,7 @@ public class CommentManager {
     }
 
     public List<Comment> getAllCommentsForPatientId(String patientId) {
-        logger.info("Attempting to get additional details for " + patientId);
+        logger.info("Attempting to get comments for " + patientId);
 
         Iterable<Comment> comments = databaseController.getCommentsForPatient(Integer.parseInt(patientId));
         List<Comment> commentsList = turnToList(comments);
@@ -43,8 +42,8 @@ public class CommentManager {
             return commentsList;
         }
 
-        logger.info("No additional details returned");
-        return null;
+        logger.info("No comments returned");
+        return commentsList;
     }
 
     public void editComment(String commentId, String commentText) {
@@ -62,13 +61,28 @@ public class CommentManager {
 
     public void deleteComment(String commentId) {
         logger.info("Attempting to delete Comment with id: " + commentId);
+
+        Iterable<Comment> beforeComments = databaseController.getAllComments();
+        List <Comment> beforeList = turnToList(beforeComments);
+
+        for (Comment comment: beforeList)
+            logger.info(comment.printInfo());
+
+        logger.info("Comment size:" + beforeList.size());
+
         Optional<Comment> optionalComment = databaseController.getComment(Integer.parseInt(commentId));
         if (optionalComment.isPresent()) {
             Comment comment = optionalComment.get();
             logger.info("Comment is present");
             databaseController.deleteComment(comment);
         }
-        logger.info("Comment is not present");
+
+        Iterable<Comment> afterComments = databaseController.getAllComments();
+        List <Comment> afterList = turnToList(afterComments);
+
+        for (Comment comment: afterList)
+            logger.info(comment.printInfo());
+
     }
 
     private List<Comment> turnToList(Iterable <Comment> iterable){

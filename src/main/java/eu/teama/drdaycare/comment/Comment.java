@@ -11,7 +11,6 @@ public class Comment {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-
     private int patient_id;
     private int creator_id;
     private String comment_text;
@@ -52,4 +51,16 @@ public class Comment {
         return visible_to_patient;
     }
 
+    public int getPatient_id(){
+        return patient_id;
+    }
+
+    public int getCreator_id(){
+        return creator_id;
+    }
+
+    public String printInfo() {
+        String info = "Id: " + id + " patientId " + patient_id;
+        return info;
+    }
 }

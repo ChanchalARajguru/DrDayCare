@@ -39,6 +39,24 @@ function getallPatientdetails(){
     return final_response;
 }
 
+function getallDetailsForPatient(){
+    $.ajax({
+        type: "GET",
+        url: baseUrl + "/MedicalStaff/allPatientdetails",
+
+        contentType: "application/json; charset=utf-8",
+        async: false,
+        cache: false,
+        success: function (response) {
+            final_response = response;
+        },
+        error: function () {
+            alert("Error on server side!")
+        }
+    });
+    return final_response;
+}
+
 function getUsers() {
 
     $.ajax({

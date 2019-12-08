@@ -1,44 +1,109 @@
 <!DOCTYPE html>
 <html lang="en">
 <script src="../template_css/includeTemplate.js"></script>
-<body>
-<div w3-include-html="../drTemplate.html"></div>
 
-<style>
-    .btn-group .button {
-        background-color: #353880;
-        border: 1px solid green;
-        color: white;
-        padding: 15px 32px;
-        text-align: center;
-        text-decoration: none;
-        font-size: 16px;
-        cursor: pointer;
-        width: 250px;
-        display: block;
-    }
+<head>
+    <div w3-include-html="../drTemplate.html"></div>
 
-    .btn-group .button:not(:last-child) {
-        border-bottom: none; /* Prevent double borders */
-    }
+    <style>
+        .btn-group .button {
+            background-color: #353880;
+            border: 1px solid green;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 16px;
+            cursor: pointer;
+            width: 250px;
+            display: block;
+        }
 
-    .btn-group .button:hover {
-        background-color: #3e8e41;
-    }
-</style>
+        .btn-group .button:not(:last-child) {
+            border-bottom: none; /* Prevent double borders */
+        }
+
+        .btn-group .button:hover {
+            background-color: #3e8e41;
+        }
+
+        #comments-container{
+            border: black;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .jumbotron .detail p{
+            font-size: 16px;
+        }
+
+        .btn-primary{
+            margin: 5px 10px;
+            height: 30px;
+            width: 80px;
+        }
+
+        .btn-danger{
+            margin: 5px 10px;
+            height: 30px;
+            width: 80px;
+        }
+
+        .btn-success{
+            margin:10px 250px;
+            float:right;
+        }
+
+
+    </style>
 </head>
 <body>
 
+<div class="row">
+    <h1 >
+        Dummy Patient
+    </h1>
 
-
-<div class="btn-group">
-    <button class="button">View Allergies</button>
-    <button class="button">Patient Medications</button>
-
+    <button class = "col-lg-2 btn btn-success">
+        Add New
+    </button>
 </div>
 
+<div class="row">
+    <div class="btn-group col-lg-3">
+        <button class="button">View Allergies</button>
+        <button class="button">Patient Medications</button>
+    </div>
+
+    <div class = "container col-lg-7" id = "comments-container">
+        <div id = "current-detail" class = "jumbotron row">
+
+            <div  class = "col-md-10 detail">
+                <p>
+                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+                </p>
+            </div>
+            <div class = "col-md-2">
+                Written by:
+                <label>
+                    Doctor Name
+                </label>
+                <button class = "btn btn-primary edit-button" >
+                    Edit
+                </button>
+                <button class = "btn btn-danger delete-button">
+                    Delete
+                </button>
+            </div>
+
+        </div>
+
+    </div>
+</div>
 
 <script>
     includeHTML();
 </script>
-
+</body>

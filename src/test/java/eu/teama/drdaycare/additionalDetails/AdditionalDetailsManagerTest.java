@@ -67,7 +67,7 @@ class AdditionalDetailsManagerTest {
 
         List<AdditionalDetails> additionalDetailsList = additionalDetailsManager.getAdditionalDetailsForPatient(stringPatientId);
 
-        assertThat(additionalDetailsList).isNull();
+        assertThat(additionalDetailsList).isEmpty();
     }
 
     @Test

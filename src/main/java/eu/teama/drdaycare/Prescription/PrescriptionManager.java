@@ -57,13 +57,7 @@ public class PrescriptionManager {
             prescriptionDetailsList.add(prescriptionDetail);
         }
 
-        if (prescriptionDetailsList.size() > 0) {
-            logger.info("Returning prescriptions list");
-            return prescriptionDetailsList;
-        }
-
-        logger.info("Could not find any prescriptions");
-        return null;
+        return prescriptionDetailsList;
     }
 
     private String findUserNameById(ArrayList<User> users, int id){

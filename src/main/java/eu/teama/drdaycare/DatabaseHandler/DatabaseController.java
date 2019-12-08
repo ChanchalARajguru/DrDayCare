@@ -188,6 +188,10 @@ public class DatabaseController {
         logger.info("Deleting comment with Id: " + comment.getId());
         commentRepository.deleteById(comment.getId());
     }
+
+    public Iterable<Comment> getAllComments() {
+        return commentRepository.findAll();
+    }
 }
 
 

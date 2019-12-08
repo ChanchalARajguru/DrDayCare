@@ -3,7 +3,6 @@ package eu.teama.drdaycare.IntegrationTests;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import eu.teama.drdaycare.additionalDetails.AdditionalDetails;
 import eu.teama.drdaycare.additionalDetails.AdditionalDetailsRequest;
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -106,7 +105,7 @@ public class AdditionalDetailsTest {
                 .andExpect(status().isOk());
 
         //Check to see if previous endpoint worked
-        ResultActions resultActionAfter = mockMvc.perform(post("/doctor/patientAdditionalDetails/{patientId}", patientId))
+        ResultActions resultActionAfter = mockMvc.perform(get("/doctor/patientAdditionalDetails/{patientId}", patientId))
                 .andExpect(status().isOk());
 
         MvcResult resultAfter = resultActionAfter.andReturn();
@@ -116,11 +115,11 @@ public class AdditionalDetailsTest {
     }
 
     @Test
-    @Sql(scripts = {"classpath:dataForTests/additionalDetails-h2.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+    @Sql(scripts = {"classpath:dataForTests/singleAdditionalDetail-h2.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
     @Sql(scripts = {"classpath:dataForTests/additionalDetailsCleanup-h2.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     public void testDeletePresentDetail() throws Exception {
         //Setup Variables
-        int patientId = 1; int creatorId = 2; String commentText = "This is our detail"; int detailId = 1;
+        int patientId = 2; int creatorId = 1; String commentText = "This is our detail"; int detailId = 1;
         AdditionalDetails additionalDetail = new AdditionalDetails(detailId,creatorId,patientId, commentText);
 
         ArrayList<AdditionalDetails> expectedResponseBefore = new ArrayList<>();
@@ -140,11 +139,11 @@ public class AdditionalDetailsTest {
         assertEquals(expectJsonResponseBefore, jsonResponseBefore);
 
         //Run endpoint
-        mockMvc.perform(get("/doctor/patientAdditionalDetails/{patientId}/{detailId}", patientId, detailId))
+        mockMvc.perform(delete("/doctor/patientAdditionalDetails/{patientId}/{detailId}", patientId, detailId))
                 .andExpect(status().isOk());
 
         //Check that object is gone
-        ResultActions resultActionAfter = mockMvc.perform(post("/doctor/patientAdditionalDetails/{patientId}", patientId));
+        ResultActions resultActionAfter = mockMvc.perform(get("/doctor/patientAdditionalDetails/{patientId}", patientId));
 
         MvcResult resultAfter = resultActionAfter.andReturn();
         String jsonResponseAfter = resultAfter.getResponse().getContentAsString();
@@ -153,11 +152,11 @@ public class AdditionalDetailsTest {
     }
 
     @Test
-    @Sql(scripts = {"classpath:dataForTests/additionalDetails-h2.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+    @Sql(scripts = {"classpath:dataForTests/singleAdditionalDetail-h2.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
     @Sql(scripts = {"classpath:dataForTests/additionalDetailsCleanup-h2.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     public void testEditValidDetail() throws Exception {
         //Setup Variables
-        int patientId = 1; int creatorId = 2; String originalCommentText = "This is our detail"; String newCommentText= "This is the new detail"; int detailId = 1;
+        int patientId = 2; int creatorId = 1; String originalCommentText = "This is our detail"; String newCommentText= "This is the new detail"; int detailId = 1;
         AdditionalDetails additionalDetail = new AdditionalDetails(detailId,creatorId,patientId, originalCommentText);
 
         ArrayList<AdditionalDetails> expectedResponseBefore = new ArrayList<>();
@@ -175,7 +174,7 @@ public class AdditionalDetailsTest {
         MvcResult resultBefore = resultActionBefore.andReturn();
         String jsonResponseBefore = resultBefore.getResponse().getContentAsString();
 
-        assertEquals(jsonResponseBefore, expectJsonResponseBefore);
+        assertEquals(expectJsonResponseBefore, jsonResponseBefore);
 
         //Run endpoint
         mockMvc.perform(post("/doctor/patientAdditionalDetails/{patientId}/{detailId}", patientId, detailId)
@@ -184,7 +183,7 @@ public class AdditionalDetailsTest {
                 .andExpect(status().isOk());
 
         //Check that has changed
-        ResultActions resultActionAfter = mockMvc.perform(post("/doctor/patientAdditionalDetails/{patientId}", patientId))
+        ResultActions resultActionAfter = mockMvc.perform(get("/doctor/patientAdditionalDetails/{patientId}", patientId))
                 .andExpect(status().isOk());
 
         MvcResult resultAfter = resultActionAfter.andReturn();

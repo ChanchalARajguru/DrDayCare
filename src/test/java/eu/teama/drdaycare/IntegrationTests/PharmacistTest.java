@@ -1,9 +1,6 @@
 package eu.teama.drdaycare.IntegrationTests;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import eu.teama.drdaycare.additionalDetails.AdditionalDetails;
-import eu.teama.drdaycare.additionalDetails.AdditionalDetailsRequest;
 import eu.teama.drdaycare.comment.Comment;
 import eu.teama.drdaycare.comment.CommentRequest;
 import org.junit.Test;
@@ -18,12 +15,10 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.ResultActions;
 
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
 import static org.junit.Assert.assertEquals;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
@@ -40,11 +35,11 @@ public class PharmacistTest {
     @Sql(scripts = {"classpath:dataForTests/comment-h2.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
     @Sql(scripts = {"classpath:dataForTests/commentCleanup-h2.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     public void testGetAllCommentsForPatientWithValidId() throws Exception {
-        String patientId = "2"; int creatorId = 1;
+        int patientId = 3; int creatorId = 2;
 
         ArrayList<Comment> expectedResponse = new ArrayList<>();
         for (int i = 1; i <= 5; i++){
-            Comment comment = new Comment(i,  creatorId, "This is comment " + i, true);
+            Comment comment = new Comment(i, patientId,  creatorId, "This is comment " + i, true);
             expectedResponse.add(comment);
         }
 
@@ -62,7 +57,7 @@ public class PharmacistTest {
     @Sql(scripts = {"classpath:dataForTests/comment-h2.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
     @Sql(scripts = {"classpath:dataForTests/commentCleanup-h2.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     public void testGetAllCommentsForPatientWithoutValidId() throws Exception {
-        String patientId = "3"; int creatorId = 1;
+        String patientId = "4"; int creatorId = 1;
 
         ArrayList<Comment> expectedResponse = new ArrayList<>();
 
@@ -77,11 +72,11 @@ public class PharmacistTest {
     }
 
     @Test
-    @Sql(scripts = {"classpath:dataForTests/comment-h2.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+    @Sql(scripts = {"classpath:dataForTests/commentCleanup-h2.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
     @Sql(scripts = {"classpath:dataForTests/commentCleanup-h2.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     public void testAddComment() throws Exception {
         //Setup Variables
-        int patient_id = 1; int creator_id = 2; String comment_text = "This is a comment"; boolean visible_to_patient = true;
+        int patient_id = 3; int creator_id = 2; String comment_text = "This is a comment"; boolean visible_to_patient = true; int commentId = 0;
         Comment comment = new Comment(patient_id, creator_id, comment_text, visible_to_patient);
 
         ArrayList<Comment> expectedResponseBefore = new ArrayList<>();
@@ -104,27 +99,27 @@ public class PharmacistTest {
         assertEquals(expectJsonResponseBefore, jsonResponseBefore);
 
         //Run Endpoint
-        mockMvc.perform(post("/pharmacist/comment/{patientId}", patient_id)
+        mockMvc.perform(post("/pharmacist/comment")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(validRequestJson))
                 .andExpect(status().isOk());
 
         //Check that change has happened
-        ResultActions resultActionAfter = mockMvc.perform(post("/pharmacist/comment/{patientId}", patient_id))
+        ResultActions resultActionAfter = mockMvc.perform(get("/pharmacist/comment/{patientId}", patient_id))
                 .andExpect(status().isOk());
 
         MvcResult resultAfter = resultActionAfter.andReturn();
         String jsonResponseAfter = resultAfter.getResponse().getContentAsString();
 
-        assertEquals(jsonResponseAfter, expectJsonResponseAfter);
+        assertEquals(expectJsonResponseAfter, jsonResponseAfter);
     }
 
     @Test
-    @Sql(scripts = {"classpath:dataForTests/comment-h2.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+    @Sql(scripts = {"classpath:dataForTests/singleComment-h2.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
     @Sql(scripts = {"classpath:dataForTests/commentCleanup-h2.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     public void testDeleteComment() throws Exception {
         //Setup Variables
-        int comment_id = 1; int patient_id = 1; int creator_id = 2; String comment_text = "This is a comment"; boolean visible_to_patient = true;
+        int comment_id = 0; int patient_id = 3; int creator_id = 2; String comment_text = "This is a single comment"; boolean visible_to_patient = true;
         Comment comment = new Comment(patient_id, creator_id, comment_text, visible_to_patient);
 
         ArrayList<Comment> expectedResponseBefore = new ArrayList<>();
@@ -141,31 +136,32 @@ public class PharmacistTest {
         MvcResult resultBefore = resultActionBefore.andReturn();
         String jsonResponseBefore = resultBefore.getResponse().getContentAsString();
 
-        assertEquals(expectJsonResponseBefore, jsonResponseBefore);
+        assertEquals(jsonResponseBefore, expectJsonResponseBefore);
 
         //Run Endpoint
-        mockMvc.perform(get("/pharmacist/comment/{patientId}/{commentId}", patient_id, comment_id))
+        mockMvc.perform(delete("/pharmacist/comment/{patientId}/{commentId}", 3, 0))
                 .andExpect(status().isOk());
 
         //Check that change has happened
-        ResultActions resultActionAfter = mockMvc.perform(post("/pharmacist/comment/{patientId}", patient_id))
+        ResultActions resultActionAfter = mockMvc.perform(get("/pharmacist/comment/{patientId}", patient_id))
                 .andExpect(status().isOk());
 
         MvcResult resultAfter = resultActionAfter.andReturn();
         String jsonResponseAfter = resultAfter.getResponse().getContentAsString();
 
-        assertEquals(jsonResponseAfter, expectJsonResponseAfter);
+        assertEquals(expectJsonResponseAfter, jsonResponseAfter);
     }
 
     @Test
-    @Sql(scripts = {"classpath:dataForTests/comment-h2.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+    @Sql(scripts = {"classpath:dataForTests/singleComment-h2.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
     @Sql(scripts = {"classpath:dataForTests/commentCleanup-h2.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     public void testEditComment() throws Exception {
         //Setup Variables
-        int comment_id = 1; int patient_id = 1; int creator_id = 2; String comment_text = "This is a comment"; String newCommentText = "This is a new commetn"; boolean visible_to_patient = true;
+        int comment_id = 1; int patient_id = 3; int creator_id = 2; String comment_text = "This is a single comment"; String newCommentText = "This is a new commetn"; boolean visible_to_patient = true;
         Comment comment = new Comment(patient_id, creator_id, comment_text, visible_to_patient);
 
         ArrayList<Comment> expectedResponseBefore = new ArrayList<>();
+        expectedResponseBefore.add(comment);
         String expectJsonResponseBefore = mapper.writeValueAsString(expectedResponseBefore);
 
         ArrayList<Comment> expectedResponseAfter = new ArrayList<>();
@@ -189,12 +185,12 @@ public class PharmacistTest {
                 .andExpect(status().isOk());
 
         //Check that change has happened
-        ResultActions resultActionAfter = mockMvc.perform(post("/pharmacist/comment/{patientId}", patient_id))
+        ResultActions resultActionAfter = mockMvc.perform(get("/pharmacist/comment/{patientId}", patient_id))
                 .andExpect(status().isOk());
 
         MvcResult resultAfter = resultActionAfter.andReturn();
         String jsonResponseAfter = resultAfter.getResponse().getContentAsString();
 
-        assertEquals(jsonResponseAfter, expectJsonResponseAfter);
+        assertEquals(expectJsonResponseAfter, jsonResponseAfter);
     }
 }
